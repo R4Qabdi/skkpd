@@ -51,20 +51,82 @@
     </div>
     <?php
     switch(@$_GET['page']){
-        case "in-siswa":
-            include "pages/in-siswa.php";
-        break;
-        case "re-siswa":
-            include "pages/re-siswa.php";
-        break;
-        case "up-siswa":
-            include "pages/up-siswa.php";
-        break;
         case "home":
             include "pages/home.php";
         break;
         default:
             include "pages/notfound.php";
+        break;
+        
+        case "in-siswa":
+            include "pages/siswa/in-siswa.php";
+        break;
+        case "re-siswa":
+            include "pages/siswa/re-siswa.php";
+        break;
+        case "up-siswa":
+            include "pages/siswa/up-siswa.php";
+        break;
+        
+        case "in-operator":
+            include "pages/operator/in-operator.php";
+        break;
+        case "re-operator":
+            include "pages/operator/re-operator.php";
+        break;
+        case "up-operator":
+            include "pages/operator/up-operator.php";
+        break;
+
+
+        case "in-pengguna":
+            include "pages/pengguna/in-pengguna.php";
+        break;
+        case "re-pengguna":
+            include "pages/pengguna/re-pengguna.php";
+        break;
+        case "up-pengguna":
+            include "pages/pengguna/up-pengguna.php";
+        break;
+        
+        case "in-jurusan":
+            include "pages/jurusan/in-jurusan.php";
+        break;
+        case "re-jurusan":
+            include "pages/jurusan/re-jurusan.php";
+        break;
+        case "up-jurusan":
+            include "pages/jurusan/up-jurusan.php";
+        break;
+        
+        case "in-sertifikat":
+            include "pages/sertifikat/in-sertifikat.php";
+        break;
+        case "re-sertifikat":
+            include "pages/sertifikat/re-sertifikat.php";
+        break;
+        case "up-sertifikat":
+            include "pages/sertifikat/up-sertifikat.php";
+        break;
+        
+        case "in-kegiatan":
+            include "pages/kegiatan/in-kegiatan.php";
+        break;
+        case "re-kegiatan":
+            include "pages/kegiatan/re-kegiatan.php";
+        break;
+        case "up-kegiatan":
+            include "pages/kegiatan/up-kegiatan.php";
+        break;
+        
+        case "in-kategori":
+            include "pages/kategori/in-kategori.php";
+        break;
+        case "re-kategori":
+            include "pages/kategori/re-kategori.php";
+        break;
+        case "up-kategori":
+            include "pages/kategori/up-kategori.php";
         break;
     }
     ?>
