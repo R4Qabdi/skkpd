@@ -1,5 +1,5 @@
 <?php
-include "koneksi.php";
+ 
 if(isset($_POST['submit'])){
     $nis = $_POST['nis'];
     if (strlen($nis)>4){
@@ -99,7 +99,7 @@ if(isset($_POST['submit'])){
                     <select class="form-select form-select-lg" name="jurusan" id="">
                         <option selected>Pilih jurusan</option>
                         <?php
-                        include "koneksi.php";
+                         
                         
                         $data_jurusan = mysqli_query($koneksi, "SELECT * from tb_jurusan");
                         

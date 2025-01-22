@@ -1,5 +1,5 @@
 <?php
-include "koneksi.php";
+ 
     if(isset($_POST['submit'])){
         $nis = $_POST['nis'];
         if (strlen($nis)>4){
@@ -45,7 +45,7 @@ include "koneksi.php";
         <div class="col">
             <form action="" method="post">
                 <?php
-                include "koneksi.php";
+                 
                 $nis=$_GET['nis'];
                 $placeholder = mysqli_fetch_assoc(mysqli_query($koneksi,"SELECT * FROM tb_siswa INNER JOIN tb_jurusan USING(id_jurusan) WHERE nis='$nis'"));
 
@@ -53,7 +53,7 @@ include "koneksi.php";
                 <div class="mb-3">
                     <label for="" class="form-label">NIS</label>
                     <input type="number" class="form-control" name="nis" id="" aria-describedby="helpId"
-                        placeholder="NIS" value="<?=$placeholder['nis']?>" />
+                        placeholder="NIS" value="<?=$placeholder['nis']?>" disabled />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Absen</label>
@@ -90,7 +90,7 @@ include "koneksi.php";
                     <select class="form-select form-select-lg" name="jurusan" id="">
                         <option>Pilih jurusan</option>
                         <?php
-                        include "koneksi.php";
+                         
                         
                         $data_jurusan = mysqli_query($koneksi, "SELECT * from tb_jurusan");
                         

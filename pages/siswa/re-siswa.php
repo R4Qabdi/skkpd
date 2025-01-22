@@ -1,5 +1,5 @@
 <?php
-include "koneksi.php";
+ 
 if(isset($_GET['nis'])){
     $ceknis = $_GET['nis'];
     $result = mysqli_query($koneksi, "DELETE FROM tb_siswa WHERE nis='$ceknis'");
@@ -17,9 +17,6 @@ if(isset($_GET['nis'])){
         <div class="col-10">
             <div class="table">
                 <?php
-                include"koneksi.php";
-                $id_terpilih;
-                $data_siswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN tb_jurusan USING(id_jurusan)");
                 ?>
                 <table class="table table-secondary">
                     <thead>
@@ -37,6 +34,7 @@ if(isset($_GET['nis'])){
                     </thead>
                     <tbody>
                         <?php
+                            $data_siswa = mysqli_query($koneksi, "SELECT * FROM tb_siswa INNER JOIN tb_jurusan USING(id_jurusan)");
                             while ($data = mysqli_fetch_assoc($data_siswa)){
                         ?>
                         <tr class="">

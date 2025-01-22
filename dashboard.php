@@ -1,6 +1,5 @@
 <?php
-
-
+    include "koneksi.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +26,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#" aria-current="page">Home <span
+                    <a class="nav-link active" href="dashboard.php?page=home" aria-current="page">Home <span
                             class="visually-hidden">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
@@ -35,6 +34,12 @@
                         aria-haspopup="true" aria-expanded="false">view</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="dashboard.php?page=re-siswa">tabel siswa</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-operator">tabel operator</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-pengguna">tabel pengguna</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-sertifikat">tabel sertifikat</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-kegiatan">tabel kegiatan</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-kategori">tabel kategori</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-jurusan">tabel jurusan</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -42,12 +47,19 @@
                         aria-haspopup="true" aria-expanded="false">input</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="dashboard.php?page=in-siswa">input siswa</a>
+                        <a class="dropdown-item" href="dashboard.php?page=in-operator">input operator</a>
+                        <a class="dropdown-item" href="dashboard.php?page=in-pengguna">input pengguna</a>
+                        <a class="dropdown-item" href="dashboard.php?page=in-sertifikat">input sertifikat</a>
+                        <a class="dropdown-item" href="dashboard.php?page=in-kegiatan">input kegiatan</a>
+                        <a class="dropdown-item" href="dashboard.php?page=in-kategori">input kategori</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-jurusan">tabel jurusan</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container-md p-5">
+
     </div>
     <?php
     switch(@$_GET['page']){
@@ -61,8 +73,11 @@
         case "in-siswa":
             include "pages/siswa/in-siswa.php";
         break;
-        case "re-siswa":
+        case "og-re-siswa":
             include "pages/siswa/re-siswa.php";
+        break;
+        case "re-siswa":
+            include "pages/siswa/re-siswa-card.php";
         break;
         case "up-siswa":
             include "pages/siswa/up-siswa.php";
