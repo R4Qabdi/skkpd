@@ -24,24 +24,20 @@ if (isset($_POST['submit'])){
                     <label for="" class="form-label">Kode Operator</label>
                     <input type="text" class="form-control" name="kode" id="" aria-describedby="helpId"
                         placeholder="" />
-                    <small id="helpId" class="form-text text-muted">Help text</small>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Nama Lengkap</label>
                     <input type="text" class="form-control" name="nama" id="" aria-describedby="helpId"
                         placeholder="" />
-                    <small id="helpId" class="form-text text-muted">Help text</small>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Username</label>
                     <input type="text" class="form-control" name="user" id="" aria-describedby="helpId"
                         placeholder="" />
-                    <small id="helpId" class="form-text text-muted">Help text</small>
                 </div>
                 <button name="submit" type="submit" class="btn btn-primary">
                     Submit
                 </button>
-
             </form>
         </div>
         <div class="col-2"></div>

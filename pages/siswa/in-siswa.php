@@ -34,9 +34,16 @@ if(isset($_POST['submit'])){
     // $cek = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT nis FROM tb_siswa"));
     // if($cek.has)
     if ($lancar = true){
-        $result = mysqli_query($koneksi, "INSERT INTO tb_siswa VALUES('$nis','$absen','$nama','$telp','$email','$kelas','$angkatan','$jurusan');");    
+        $resultsiswa = mysqli_query($koneksi, "INSERT INTO tb_siswa VALUES('$nis','$absen','$nama','$telp','$email','$kelas','$angkatan','$jurusan');");
+        $pass_siswa = "siswa".$nis;
+        $resultuser = mysqli_query($koneksi, "INSERT INTO tb_pengguna VALUES(null,null,'$nis','$pass_siswa')");
     }
-    
+    if ($resultsiswa == $resultuser){
+        $result = true;
+    }else{
+        $result = false;
+    }
+
 
     if ($result){
         echo"<script>window.location.href = 'dashboard.php?page=re-siswa'</script>";

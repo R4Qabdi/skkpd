@@ -15,14 +15,11 @@ if (isset($_GET['kode'])){
     <div class="row justify-content-center align-items-center g-2">
         <div class="col-2"></div>
         <div class="col-8">
-            <a name="" id="" class="btn btn-success m-auto" href="dashboard.php?page=in-siswa" role="button">Tambah
+            <a name="" id="" class="btn btn-success m-auto" href="dashboard.php?page=in-operator" role="button">Tambah
                 data</a>
             <div class="table-responsive-lg">
                 <table class="table table-striped table-hover table-borderless table-dark align-middle">
                     <thead class="table-light">
-                        <caption>
-                            tabel operator
-                        </caption>
                         <tr>
                             <th>Kode operator</th>
                             <th>Nama panjang</th>
