@@ -6,8 +6,8 @@ if (isset($_POST['submit'])){
     $kategori = $_POST['kategori'];
     $sub = $_POST['sub'];
 
-    $result = mysqli_query($koneksi, "UPDATE tb_kategori SET id_kategori = '$id', kategori = '$kategori', sub_kategori = '$sub' WHERE id_kategori = '$$cekkey'");
-
+    $result = mysqli_query($koneksi, "UPDATE tb_kategori SET id_kategori = '$id', kategori = '$kategori', sub_kategori = '$sub' WHERE id_kategori = '$cekkey'");
+    
     if ($result){
         echo "<script>window.location.href = 'dashboard.php?page=re-kategori'; alert('data berhasil masuk')</script>";
     }else{

@@ -28,7 +28,7 @@ if (isset($_POST['submit'])){
                 <div class="mb-3">
                     <label for="" class="form-label">Kode Operator</label>
                     <input type="text" class="form-control" name="kode" id="" aria-describedby="helpId" placeholder=""
-                        value="<?=$data['kode_operator']?>" />
+                        value="<?=$data['kode_operator']?>" disabled />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Nama Lengkap</label>

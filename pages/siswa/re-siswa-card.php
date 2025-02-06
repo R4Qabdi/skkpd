@@ -1,11 +1,17 @@
+<?php
+if (isset($_GET['nis'])){
+    
+    $ceknis = $_GET['nis'];
+    $result = mysqli_query($koneksi, "DELETE FROM tb_siswa WHERE nis='$ceknis'");
+    if($result){
+        echo "<script>alert('data berhasil dihapus!')</script>";
+    }else{
+        echo "<script>alert('data gagal dihapus!')</script>";
+    }
+}
+?>
 <div class="container-lg">
     <div class="row justify-content-center align-items-center g-2">
-        <!-- <div class="col-4"></div>
-        <div class="col-4">
-            <a name="" id="" class="btn btn-success m-auto" href="dashboard.php?page=in-siswa" role="button">Tambah
-                data</a>
-        </div>
-        <div class="col-4"></div> -->
         <a name="" id="" class="btn btn-success m-auto" href="dashboard.php?page=in-siswa" role="button">Tambah
             data</a>
         <?php
@@ -26,16 +32,27 @@
                 </p>
                 <?php
                 $ceknis = $data['nis'];
-                $result = mysqli_query($koneksi, "SELECT nis FROM tb_siswa INNER JOIN tb_sertifikat USING(nis) where nis = '$ceknis'");
-                if(!mysqli_num_rows($result)>0){
+                $resultsertif = mysqli_query($koneksi, "SELECT nis FROM tb_siswa INNER JOIN tb_sertifikat USING(nis) where nis = '$ceknis'");
+                $resultuser = mysqli_query($koneksi, "SELECT nis FROM tb_siswa INNER JOIN tb_pengguna USING(nis) where nis = '$ceknis'");
+                if(mysqli_num_rows($resultuser)>0 && mysqli_num_rows($resultsertif)>0){
                 ?>
-                <a name="hapus" id="" class="btn btn-danger" href="dashboard.php?page=re-siswa&&nis=<?=$data['nis']?>"
-                    role="button" onclick="return confirm('apakah anda yakin untuk menghapus data ini?')">delete</a>
+                <a name="" id="" class="btn btn-danger" href="" role="button"
+                    onclick="return alert('hapus data sertifikat dan data pengguna terlebih dahulu')">delete</a>
                 <?php
-                }else{
+                }else if(mysqli_num_rows($resultsertif)>0){
                 ?>
                 <a name="" id="" class="btn btn-danger" href="" role="button"
                     onclick="return alert('hapus data sertifikat terlebih dahulu')">delete</a>
+                <?php
+                }else if(mysqli_num_rows($resultuser)>0){
+                ?>
+                <a name="" id="" class="btn btn-danger" href="" role="button"
+                    onclick="return alert('hapus data pengguna terlebih dahulu')">delete</a>
+                <?php
+                }else{
+                ?>
+                <a name="hapus" id="" class="btn btn-danger" href="dashboard.php?page=re-siswa&&nis=<?=$data['nis']?>"
+                    role="button" onclick="return confirm('apakah anda yakin untuk menghapus data ini?')">delete</a>
                 <?php
                 }
                 ?>

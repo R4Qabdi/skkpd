@@ -1,37 +1,16 @@
 <?php
- 
+    $ceknis = $_GET['nis'];
     if(isset($_POST['submit'])){
-        $nis = $_POST['nis'];
-        if (strlen($nis)>4){
-            //ignore
-        }
+
         $absen = $_POST['absen'];
-        if (strlen($absen)>4){
-            //ignore
-        }
         $nama = $_POST['nama'];
-        if (strlen($absen)>4){
-            //ignore
-        }
         $telp = $_POST['telp'];
-        if (strlen($absen)>4){
-            //ignore
-        }
         $email = $_POST['email'];
-        if (strlen($absen)>4){
-            //ignore
-        }
         $kelas = $_POST['kelas'];
-        if (strlen($absen)>4){
-            //ignore
-        }
         $angkatan = $_POST['angkatan'];
-        if (strlen($absen)>4){
-            //ignore
-        }
         $jurusan = $_POST['jurusan'];
 
-        $result = mysqli_query($koneksi, "UPDATE tb_siswa SET nis='$nis',absen='$absen',nama_siswa='$nama',telp='$telp',email='$email',kelas='$kelas',angkatan='$angkatan',id_jurusan='$jurusan' where nis='$nis'");
+        $result = mysqli_query($koneksi, "UPDATE tb_siswa SET absen='$absen', nama_siswa='$nama', telp='$telp', email='$email', kelas='$kelas', angkatan='$angkatan', id_jurusan='$jurusan' where nis='$ceknis'");
         if($result){
             echo"<script>window.location.href='dashboard.php?page=re-siswa';alert('data berhasil diupdate');</script>";
         }else{
@@ -45,45 +24,44 @@
         <div class="col">
             <form action="" method="post">
                 <?php
-                 
-                $nis=$_GET['nis'];
-                $placeholder = mysqli_fetch_assoc(mysqli_query($koneksi,"SELECT * FROM tb_siswa INNER JOIN tb_jurusan USING(id_jurusan) WHERE nis='$nis'"));
-
+                $ceknis = $_GET['nis'];
+                $data = mysqli_fetch_assoc(mysqli_query($koneksi,"SELECT * FROM tb_siswa INNER JOIN tb_jurusan USING(id_jurusan) WHERE nis='$ceknis'"));
                 ?>
                 <div class="mb-3">
                     <label for="" class="form-label">NIS</label>
-                    <input type="number" class="form-control" name="nis" id="" aria-describedby="helpId"
-                        placeholder="NIS" value="<?=$placeholder['nis']?>" disabled />
+                    <input value="<?=$data['nis']?>" type="number" class="form-control" name="nis" id=""
+                        aria-describedby="emailHelpId" placeholder="NIS" disabled />
                 </div>
+
                 <div class="mb-3">
                     <label for="" class="form-label">Absen</label>
                     <input type="number" class="form-control" name="absen" id="" aria-describedby="helpId"
-                        placeholder="nomor absen" value="<?=$placeholder['absen']?>" />
+                        placeholder="nomor absen" value="<?=$data['absen']?>" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Nama siswa</label>
                     <input type="text" class="form-control" name="nama" id="" aria-describedby="helpId" placeholder=""
-                        value="<?=$placeholder['nama_siswa']?>" />
+                        value="<?=$data['nama_siswa']?>" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Nomor Telepon </label>
                     <input type="text" class="form-control" name="telp" id="" aria-describedby="helpId"
-                        placeholder="no. telp" value="<?=$placeholder['telp']?>" />
+                        placeholder="no. telp" value="<?=$data['telp']?>" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" id="" aria-describedby="helpId"
-                        placeholder="Email" value="<?=$placeholder['email']?>" />
+                        placeholder="Email" value="<?=$data['email']?>" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Kelas</label>
                     <input type="text" class="form-control" name="kelas" id="" aria-describedby="helpId"
-                        placeholder="X DKV 1" value="<?=$placeholder['kelas']?>" />
+                        placeholder="X DKV 1" value="<?=$data['kelas']?>" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Angkatan</label>
                     <input type="text" class="form-control" name="angkatan" id="" aria-describedby="helpId"
-                        placeholder="2024/2025" value="<?=$placeholder['angkatan']?>" />
+                        placeholder="2024/2025" value="<?=$data['angkatan']?>" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Jurusan</label>
@@ -97,7 +75,7 @@
                         while($data = mysqli_fetch_assoc($data_jurusan)){
                         ?>
                         <option value="<?=$data['id_jurusan']?>" <?php
-                        if($data['id_jurusan']==$placeholder['id_jurusan']){
+                        if($data['id_jurusan']==$data['id_jurusan']){
                             echo"selected";
                         }
                         ?>><?=$data['jurusan']?></option>

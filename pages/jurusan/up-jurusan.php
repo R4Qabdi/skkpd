@@ -1,10 +1,12 @@
 <?php
+$kode = $_GET['kode'];
 if (isset($_POST['submit'])){
      
-    $id = $_POST['id'];
+    echo $id_jurusan = $_POST['id_jurusan'];
+
     $jurusan = $_POST['jurusan'];
 
-    $result = mysqli_query($koneksi, "UPDATE tb_jurusan SET id_jurusan = '$id', jurusan = '$jurusan'");
+    $result = mysqli_query($koneksi, "UPDATE tb_jurusan SET jurusan = '$jurusan' WHERE id_jurusan = '$kode'");
 
     if ($result){
         echo "<script>window.location.href = 'dashboard.php?page=re-jurusan'; alert('data berhasil masuk')</script>";
@@ -20,16 +22,16 @@ if (isset($_POST['submit'])){
         <div class="col-8">
             <form action="" method="post">
                 <?php
-                $data = mysqli_fetch_assoc(mysqli_query($koneksi , "SELECT * FROM tb_jurusan"));
+                $data = mysqli_fetch_assoc(mysqli_query($koneksi , "SELECT * FROM tb_jurusan WHERE id_jurusan = '$kode'"));
                 ?>
                 <div class="mb-3">
                     <label for="" class="form-label">ID Jurusan</label>
-                    <input value="<?=$data['id_jurusan']?>" type="text" class="form-control" name="id" id=""
-                        aria-describedby="helpId" placeholder="" />
+                    <input value="<?=$data['id_jurusan']?>" type="text" class="form-control" name="id_jurusan" id=""
+                        aria-describedby="helpId" placeholder="" disabled />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Jurusan</label>
-                    <input value="<?=$data['id_jurusan']?>" type="text" class="form-control" name="jurusan" id=""
+                    <input value="<?=$data['jurusan']?>" type="text" class="form-control" name="jurusan" id=""
                         aria-describedby="helpId" placeholder="" />
                 </div>
                 <button name="submit" type="submit" class="btn btn-primary">

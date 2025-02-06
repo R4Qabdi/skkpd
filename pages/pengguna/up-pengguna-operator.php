@@ -1,10 +1,13 @@
 <?php
+$id=$_GET['kode'];
+
 if (isset($_POST['submit-op'])){
      
-    $user = $_POST['user'];
-    $pass = $_POST['pass'];
+    echo $id = $_POST['id'];
+    echo $user = $_POST['user'];
+    echo $pass = $_POST['pass'];
 
-    $result = mysqli_query($koneksi, "INSERT INTO tb_pengguna VALUES (null,'$user',null,'$pass')");
+    $result = mysqli_query($koneksi, "UPDATE tb_pengguna SET id_pengguna='$id', username='$user', password='pass' WHERE id_pengguna = '$id' ");
 
     if ($result){
         echo "<script>window.location.href = 'dashboard.php?page=re-pengguna'; alert('data berhasil masuk')</script>";
@@ -19,6 +22,14 @@ if (isset($_POST['submit-op'])){
         <div class="col-2"></div>
         <div class="col-8">
             <form action="" method="post">
+                <?php
+                $dataf = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_pengguna WHERE id_pengguna='$id'"));
+                ?>
+                <div class="mb-3">
+                    <label for="" class="form-label">ID Pengguna</label>
+                    <input value="<?=$dataf['id_pengguna']?>" type="text" class="form-control" name="id" id=""
+                        aria-describedby="helpId" placeholder="" />
+                </div>
                 <div class="mb-3">
                     <datalist id="user">
                         <?php
@@ -31,13 +42,13 @@ if (isset($_POST['submit-op'])){
                         ?>
                     </datalist>
                     <label for="" class="form-label">Username</label>
-                    <input type="text" list="user" class="form-control" name="user" id="" aria-describedby="helpId"
-                        placeholder="" />
+                    <input value="<?=$dataf['username']?>" type="text" list="user" class="form-control" name="user"
+                        id="" aria-describedby="helpId" placeholder="" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="pass" id="" aria-describedby="helpId"
-                        placeholder="" />
+                    <input value="<?=$dataf['password']?>" type="text" class="form-control" name="pass" id=""
+                        aria-describedby="helpId" placeholder="" />
                 </div>
                 <button name="submit-op" type="submit" class="btn btn-primary">
                     Submit operator

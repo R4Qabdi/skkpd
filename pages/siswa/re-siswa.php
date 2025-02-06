@@ -1,6 +1,6 @@
 <?php
- 
-if(isset($_GET['nis'])){
+if (isset($_GET['nis'])){
+    echo"hapuuuuuuuusss";
     $ceknis = $_GET['nis'];
     $result = mysqli_query($koneksi, "DELETE FROM tb_siswa WHERE nis='$ceknis'");
     if($result){

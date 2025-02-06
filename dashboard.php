@@ -103,6 +103,12 @@
         case "up-pengguna":
             include "pages/pengguna/up-pengguna.php";
         break;
+        case "up-pengguna-siswa":
+            include "pages/pengguna/up-pengguna-siswa.php";
+        break;
+        case "up-pengguna-op":
+            include "pages/pengguna/up-pengguna-operator.php";
+        break;
         
         case "in-jurusan":
             include "pages/jurusan/in-jurusan.php";
