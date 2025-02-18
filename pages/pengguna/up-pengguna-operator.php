@@ -7,7 +7,9 @@ if (isset($_POST['submit-op'])){
     echo $user = $_POST['user'];
     echo $pass = $_POST['pass'];
 
-    $result = mysqli_query($koneksi, "UPDATE tb_pengguna SET id_pengguna='$id', username='$user', password='pass' WHERE id_pengguna = '$id' ");
+    $hashedpass = password_hash($pass , PASSWORD_DEFAULT);
+
+    $result = mysqli_query($koneksi, "UPDATE tb_pengguna SET id_pengguna='$id', username='$user', password='$hashedpass' WHERE id_pengguna = '$id' ");
 
     if ($result){
         echo "<script>window.location.href = 'dashboard.php?page=re-pengguna'; alert('data berhasil masuk')</script>";

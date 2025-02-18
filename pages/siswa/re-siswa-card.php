@@ -3,6 +3,7 @@ if (isset($_GET['nis'])){
     
     $ceknis = $_GET['nis'];
     $result = mysqli_query($koneksi, "DELETE FROM tb_siswa WHERE nis='$ceknis'");
+    mysqli_query($koneksi, "DELETE FROM tb_pengguna WHERE nis='$ceknis'");
     if($result){
         echo "<script>alert('data berhasil dihapus!')</script>";
     }else{
@@ -46,8 +47,9 @@ if (isset($_GET['nis'])){
                 <?php
                 }else if(mysqli_num_rows($resultuser)>0){
                 ?>
-                <a name="" id="" class="btn btn-danger" href="" role="button"
-                    onclick="return alert('hapus data pengguna terlebih dahulu')">delete</a>
+                <a name="hapus" id="" class="btn btn-danger" href="dashboard.php?page=re-siswa&&nis=<?=$data['nis']?>"
+                    role="button"
+                    onclick="return confirm('apakah anda yakin untuk menghapus data beserta pengguna ini?')">delete</a>
                 <?php
                 }else{
                 ?>

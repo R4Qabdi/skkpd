@@ -55,6 +55,12 @@
                         <a class="dropdown-item" href="dashboard.php?page=re-jurusan">tabel jurusan</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="stl-page/login.php" aria-current="page">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="stl-page/logout.php" aria-current="page">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>

@@ -6,7 +6,9 @@ if (isset($_POST['submit-sis'])){
     $nis = $_POST['nis'];
     $pass = $_POST['pass'];
 
-    $result = mysqli_query($koneksi, "UPDATE tb_pengguna SET id_pengguna='$id', nis='$nis', password='pass' WHERE nis='$nis' ");
+    $hashedpass = password_hash($pass , PASSWORD_DEFAULT);
+
+    $result = mysqli_query($koneksi, "UPDATE tb_pengguna SET id_pengguna='$id', nis='$nis', password='$hashedpass' WHERE nis='$nis' ");
 
     if ($result){
         echo "<script>window.location.href = 'dashboard.php?page=re-pengguna'; alert('data berhasil masuk')</script>";
@@ -49,9 +51,6 @@ if (isset($_POST['submit-sis'])){
                     <input value="<?=$dataf['password']?>" type="text" class="form-control" name="pass" id=""
                         aria-describedby="helpId" placeholder="" />
                 </div>
-                <button name="submit-op" type="submit" class="btn btn-primary">
-                    Submit operator
-                </button>
                 <button name="submit-sis" type="submit" class="btn btn-primary">
                     Submit siswa
                 </button>

@@ -40,7 +40,7 @@ if (isset($_GET['kode'])){
                         <tr class="table-primary">
                             <td scope="row"><?=$data['id_pengguna']?></td>
                             <td><?=$data['username']?></td>
-                            <td><?=$data['password']?></td>
+                            <td>*****</td>
                             <td>
                                 <a name="hapus" id="" class="btn btn-danger"
                                     href="dashboard.php?page=re-pengguna&&kode=<?=$data['id_pengguna']?>" role="button"
@@ -87,7 +87,7 @@ if (isset($_GET['kode'])){
                         <tr class="table-primary">
                             <td scope="row"><?=$data['id_pengguna']?></td>
                             <td><?=$data['nis']?></td>
-                            <td><?=$data['password']?></td>
+                            <td>*****</td>
                             <td>
                                 <a name="hapus" id="" class="btn btn-danger"
                                     href="dashboard.php?page=re-pengguna&&kode=<?=$data['id_pengguna']?>" role="button"

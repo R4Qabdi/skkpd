@@ -31,12 +31,11 @@ if(isset($_POST['submit'])){
     }
     $jurusan = $_POST['jurusan'];
 
-    // $cek = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT nis FROM tb_siswa"));
-    // if($cek.has)
     if ($lancar = true){
         $resultsiswa = mysqli_query($koneksi, "INSERT INTO tb_siswa VALUES('$nis','$absen','$nama','$telp','$email','$kelas','$angkatan','$jurusan');");
         $pass_siswa = "siswa".$nis;
-        $resultuser = mysqli_query($koneksi, "INSERT INTO tb_pengguna VALUES(null,null,'$nis','$pass_siswa')");
+        $hashedpass = password_hash($pass_siswa , PASSWORD_DEFAULT);
+        $resultuser = mysqli_query($koneksi, "INSERT INTO tb_pengguna VALUES(null,null,'$nis','$hashedpass')");
     }
     if ($resultsiswa == $resultuser){
         $result = true;

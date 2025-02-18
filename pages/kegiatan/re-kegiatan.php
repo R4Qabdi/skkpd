@@ -21,22 +21,24 @@ if (isset($_GET['kode'])){
                 <table class="table table-striped table-hover table-borderless table-dark align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>ID kegiatan</th>
-                            <th>kegiatan</th>
-                            <th>Sub kegiatan</th>
+                            <th>ID Kegiatan</th>
+                            <th>Jenis Kegiatan</th>
+                            <th>Angka Kredit</th>
+                            <th>Kategori</th>
                             <th colspan="2">aksi</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         <?php
                          
-                        $data_kegiatan = mysqli_query($koneksi, "SELECT * FROM tb_kegiatan");
+                        $data_kegiatan = mysqli_query($koneksi, "SELECT * FROM tb_kegiatan INNER JOIN tb_kategori USING(id_kategori)");
                         while ($data = mysqli_fetch_assoc($data_kegiatan)){
                         ?>
                         <tr class="table-primary">
                             <td scope="row"><?=$data['id_kegiatan']?></td>
-                            <td><?=$data['kegiatan']?></td>
-                            <td><?=$data['sub_kegiatan']?></td>
+                            <td><?=$data['jenis_kegiatan']?></td>
+                            <td><?=$data['angka_kredit']?></td>
+                            <td><?=$data['kategori']?></td>
                             <td>
                                 <?php
                                 $cekkey = $data['id_kegiatan'];

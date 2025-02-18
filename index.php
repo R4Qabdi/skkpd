@@ -59,7 +59,7 @@
 
             </div>
             <div class="col-2">
-                <a href="dashboard.php?page=#">menuju dashboard</a>
+                <a href="dashboard.php?page=home">menuju dashboard</a>
             </div>
         </div>
     </div>

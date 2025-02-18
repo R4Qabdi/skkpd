@@ -6,7 +6,7 @@ if (isset($_POST['submit'])){
     $nama = $_POST['nama'];
     $user = $_POST['user'];
 
-    $result = mysqli_query($koneksi, "UPDATE tb_operator SET kode_operator='$kode',nama_lengkap='$nama',username='$user' WHERE kode_operator = '$getkode'");
+    $result = mysqli_query($koneksi, "UPDATE tb_operator SET kode_operator='$getkode',nama_lengkap='$nama',username='$user' WHERE kode_operator = '$getkode'");
 
     if ($result){
         echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data berhasil masuk')</script>";

@@ -11,10 +11,22 @@
         $jurusan = $_POST['jurusan'];
 
         $result = mysqli_query($koneksi, "UPDATE tb_siswa SET absen='$absen', nama_siswa='$nama', telp='$telp', email='$email', kelas='$kelas', angkatan='$angkatan', id_jurusan='$jurusan' where nis='$ceknis'");
+        
+        $pass = $_POST['pass'];
+        $konpass = $_POST['konpass'];
+        if ($pass != '' || $konpass != '' ){
+            if($pass==$konpass){
+                $hashed = password_hash($pass , PASSWORD_DEFAULT);
+                $result = mysqli_query($koneksi, "UPDATE tb_pengguna SET password='$hashed' WHERE nis = '$ceknis'");
+            }else{
+                $result = 0;
+                echo"<script>alert('Password dan Konfirmasi password harus sama');</script>";
+            }
+        }
         if($result){
-            echo"<script>window.location.href='dashboard.php?page=re-siswa';alert('data berhasil diupdate');</script>";
+            echo"<script>alert('data berhasil diupdate');window.location.href='dashboard.php?page=re-siswa';</script>";
         }else{
-            echo"<script>window.location.href='dashboard.php?page=up-siswa&&".$nis."';alert('data gagal diupdate');</script>";
+            echo"<script>alert('data gagal diupdate');window.location.href='dashboard.php?page=up-siswa&&".$nis."';</script>";
         }
     }
 ?>
@@ -72,18 +84,29 @@
                         
                         $data_jurusan = mysqli_query($koneksi, "SELECT * from tb_jurusan");
                         
-                        while($data = mysqli_fetch_assoc($data_jurusan)){
+                        while($dataj = mysqli_fetch_assoc($data_jurusan)){
                         ?>
-                        <option value="<?=$data['id_jurusan']?>" <?php
-                        if($data['id_jurusan']==$data['id_jurusan']){
+                        <option value="<?=$dataj['id_jurusan']?>" <?php
+                        if($data['id_jurusan']==$dataj['id_jurusan']){
                             echo"selected";
                         }
-                        ?>><?=$data['jurusan']?></option>
+                        ?>><?=$dataj['jurusan']?></option>
                         <?php
                         }
                         ?>
                     </select>
                 </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="pass" id="" aria-describedby="emailHelpId"
+                        placeholder="Password" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Konfirmasi Password</label>
+                    <input type="text" class="form-control" name="konpass" id="" aria-describedby="emailHelpId"
+                        placeholder="Konfirmasi Password" />
+                </div>
+
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary" name="submit">
                         Submit
