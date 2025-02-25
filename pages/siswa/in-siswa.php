@@ -93,7 +93,7 @@ if(isset($_POST['submit'])){
                 <div class="mb-3">
                     <label for="" class="form-label">Kelas</label>
                     <input type="text" class="form-control" name="kelas" id="" aria-describedby="helpId"
-                        placeholder="X DKV 1" />
+                        placeholder="X/XI/XII" />
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Angkatan</label>

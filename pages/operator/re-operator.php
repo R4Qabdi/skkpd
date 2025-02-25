@@ -3,11 +3,12 @@ if (isset($_GET['kode'])){
     $id = $_GET['kode'];
 
     $result = mysqli_query($koneksi,"DELETE FROM tb_operator where kode_operator = '$id'");
+    $resultp = mysqli_query($koneksi,"DELETE FROM tb_pengguna where kode_operator = '$id'");
     
-    if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data berhasil dihapus')</script>";
+    if ($result*$resultp){
+        echo "<script>alert('data berhasil dihapus');window.location.href = 'dashboard.php?page=re-operator'; </script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data gagal dihapus')</script>";
+        echo "<script>alert('data gagal dihapus'); window.location.href = 'dashboard.php?page=re-operator'; </script>";
     }
 }
 ?>

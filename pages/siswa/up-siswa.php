@@ -17,13 +17,13 @@
         if ($pass != '' || $konpass != '' ){
             if($pass==$konpass){
                 $hashed = password_hash($pass , PASSWORD_DEFAULT);
-                $result = mysqli_query($koneksi, "UPDATE tb_pengguna SET password='$hashed' WHERE nis = '$ceknis'");
+                $resultp = mysqli_query($koneksi, "UPDATE tb_pengguna SET password='$hashed' WHERE nis = '$ceknis'");
             }else{
                 $result = 0;
                 echo"<script>alert('Password dan Konfirmasi password harus sama');</script>";
             }
         }
-        if($result){
+        if($result*$resultp){
             echo"<script>alert('data berhasil diupdate');window.location.href='dashboard.php?page=re-siswa';</script>";
         }else{
             echo"<script>alert('data gagal diupdate');window.location.href='dashboard.php?page=up-siswa&&".$nis."';</script>";

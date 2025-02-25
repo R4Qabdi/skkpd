@@ -9,9 +9,9 @@ if (isset($_POST['submit'])){
     $result = mysqli_query($koneksi, "UPDATE tb_kegiatan SET id_kegiatan = '$id', jenis_kegiatan = '$jenis', angka_kredit = '$kredit', id_kategori = '$id_kategori' WHERE id_kegiatan = '$key'");
 
     if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-kegiatan'; alert('data berhasil masuk')</script>";
+        echo "<script>alert('data berhasil masuk'); window.location.href = 'dashboard.php?page=re-kategori-kegiatan'; </script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-kegiatan'; alert('data gagal masuk')</script>";
+        echo "<script>alert('data gagal masuk');window.location.href = 'dashboard.php?page=re-kategori-kegiatan'; </script>";
     }
 }
 ?>

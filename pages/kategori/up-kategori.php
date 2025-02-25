@@ -9,9 +9,9 @@ if (isset($_POST['submit'])){
     $result = mysqli_query($koneksi, "UPDATE tb_kategori SET id_kategori = '$id', kategori = '$kategori', sub_kategori = '$sub' WHERE id_kategori = '$cekkey'");
     
     if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-kategori'; alert('data berhasil masuk')</script>";
+        echo "<script> alert('data berhasil masuk');window.location.href = 'dashboard.php?page=re-kategori-kegiatan';</script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-kategori'; alert('data gagal masuk')</script>";
+        echo "<script>alert('data gagal masuk'); window.location.href = 'dashboard.php?page=re-kategori-kegiatan'; </script>";
     }
 }
 ?>

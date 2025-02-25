@@ -9,15 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- <script src="https://cdn.tailwindcss.com/"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <link href="bootstrap/cdn/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="bootstrap/cdn/bootstrap.js" crossorigin="anonymous">
     </script>
 
 </head>
 
 <body>
+    <?php
+    $operator = true;
+    if($operator){
+    ?>
+    <!-- dashboard punya operator -->
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-primary">
         <a class="navbar-brand ms-5" href="dashboard.php?page=home">Navbar</a>
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
@@ -40,6 +43,10 @@
                         <a class="dropdown-item" href="dashboard.php?page=re-kegiatan">tabel kegiatan</a>
                         <a class="dropdown-item" href="dashboard.php?page=re-kategori">tabel kategori</a>
                         <a class="dropdown-item" href="dashboard.php?page=re-jurusan">tabel jurusan</a>
+                        <a class="dropdown-item" href="dashboard.php?page=re-kategori-kegiatan">tabel kategori
+                            kegiatan</a>
+                        <a class="dropdown-item" href="dashboard.php?page=man-re-kategori-kegiatan">tabel kategori
+                            kegiatan man</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -64,6 +71,14 @@
             </ul>
         </div>
     </nav>
+    <?php
+    }else if (!$operator){
+    ?>
+    <!-- dashboard siswa -->
+
+    <?php
+    }
+    ?>
     <div class="container-md p-5">
 
     </div>
@@ -155,6 +170,27 @@
         case "up-kategori":
             include "pages/kategori/up-kategori.php";
         break;
+
+        case "in-kategori-kegiatan":
+            include "pages/kategori-kegiatan/in.php";
+        break;
+        case "re-kategori-kegiatan":
+            include "pages/kategori-kegiatan/re.php";
+        break;
+        case "up-kategori-kegiatan":
+            include "pages/kategori-kegiatan/up.php";
+        break;
+
+        case "man-in-kategori-kegiatan":
+            include "pages/kategori-kegiatan/in-kategori-kegiatan.php";
+        break;
+        case "man-re-kategori-kegiatan":
+            include "pages/kategori-kegiatan/re-kategori-kegiatan.php";
+        break;
+        case "man-up-kategori-kegiatan":
+            include "pages/kategori-kegiatan/up-kategori-kegiatan.php";
+        break;
+
     }
     ?>
 </body>
