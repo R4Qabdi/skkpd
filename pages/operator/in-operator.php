@@ -1,16 +1,22 @@
 <?php
 if (isset($_POST['submit'])){
-     
-    $kode = $_POST['kode'];
+    
+    $random = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789"), 0, 3);
+    $kode = $random;
     $nama = $_POST['nama'];
     $user = $_POST['user'];
+    $pass = $_POST['pass'];
+    $kpass = $_POST['kpass'];
+    if ($pass==$kpass){
+        $hashedpass = password_hash($pass , PASSWORD_DEFAULT);
+    }
 
-    $result = mysqli_query($koneksi, "INSERT INTO tb_operator VALUES ('$kode','$nama','$user')");
-
-    if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data berhasil masuk')</script>";
+    $resulto = mysqli_query($koneksi, "INSERT INTO tb_operator VALUES ('$kode','$nama','$user')");
+    $resultp = mysqli_query($koneksi, "INSERT INTO tb_pengguna VALUES (null,'$user',null,'$hashedpass')");
+    if ($resulto*$resultp){
+        echo "<script>window.location.href = 'alert('data berhasil masuk');dashboard.php?page=re-operator'; </script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data gagal masuk')</script>";
+        echo "<script>window.location.href = 'alert('data gagal masuk');dashboard.php?page=re-operator'; </script>";
     }
 }
 ?>
@@ -21,11 +27,6 @@ if (isset($_POST['submit'])){
         <div class="col-8">
             <form action="" method="post">
                 <div class="mb-3">
-                    <label for="" class="form-label">Kode Operator</label>
-                    <input type="text" class="form-control" name="kode" id="" aria-describedby="helpId"
-                        placeholder="" />
-                </div>
-                <div class="mb-3">
                     <label for="" class="form-label">Nama Lengkap</label>
                     <input type="text" class="form-control" name="nama" id="" aria-describedby="helpId"
                         placeholder="" />
@@ -33,6 +34,16 @@ if (isset($_POST['submit'])){
                 <div class="mb-3">
                     <label for="" class="form-label">Username</label>
                     <input type="text" class="form-control" name="user" id="" aria-describedby="helpId"
+                        placeholder="" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="pass" id="" aria-describedby="helpId"
+                        placeholder="" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Konfirmasi Password</label>
+                    <input type="text" class="form-control" name="kpass" id="" aria-describedby="helpId"
                         placeholder="" />
                 </div>
                 <button name="submit" type="submit" class="btn btn-primary">

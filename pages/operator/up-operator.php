@@ -1,14 +1,25 @@
 <?php
 if (isset($_POST['submit'])){
     $getkode = $_GET['kode'];
-     
-    $kode = $_POST['kode'];
+    
     $nama = $_POST['nama'];
     $user = $_POST['user'];
 
-    $result = mysqli_query($koneksi, "UPDATE tb_operator SET kode_operator='$getkode',nama_lengkap='$nama',username='$user' WHERE kode_operator = '$getkode'");
+    $pass = $_POST['pass'];
+    $konpass = $_POST['kpass'];
 
-    if ($result){
+    if ($pass != '' || $konpass != '' ){
+        if($pass==$konpass){
+            $hashed = password_hash($pass , PASSWORD_DEFAULT);
+            $resultp = mysqli_query($koneksi, "UPDATE tb_pengguna SET password = '$hashedpass',username='$user' WHERE username = '$user'");
+        }else{
+            $result = 0;
+            echo"<script>alert('Password dan Konfirmasi password harus sama');</script>";
+        }
+    }
+    
+    $resulto = mysqli_query($koneksi, "UPDATE tb_operator SET nama_lengkap='$nama',username='$user' WHERE kode_operator = '$getkode'");
+    if ($result*$resultp){
         echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data berhasil masuk')</script>";
     }else{
         echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data gagal masuk')</script>";
@@ -26,11 +37,6 @@ if (isset($_POST['submit'])){
                 $data=mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_operator WHERE kode_operator = '$getkode'"));
                 ?>
                 <div class="mb-3">
-                    <label for="" class="form-label">Kode Operator</label>
-                    <input type="text" class="form-control" name="kode" id="" aria-describedby="helpId" placeholder=""
-                        value="<?=$data['kode_operator']?>" disabled />
-                </div>
-                <div class="mb-3">
                     <label for="" class="form-label">Nama Lengkap</label>
                     <input type="text" class="form-control" name="nama" id="" aria-describedby="helpId" placeholder=""
                         value="<?=$data['nama_lengkap']?>" />
@@ -39,6 +45,16 @@ if (isset($_POST['submit'])){
                     <label for="" class="form-label">Username</label>
                     <input type="text" class="form-control" name="user" id="" aria-describedby="helpId" placeholder=""
                         value="<?=$data['username']?>" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="pass" id="" aria-describedby="helpId"
+                        placeholder="" />
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Konfirmasi Password</label>
+                    <input type="text" class="form-control" name="kpass" id="" aria-describedby="helpId"
+                        placeholder="" />
                 </div>
                 <button name="submit" type="submit" class="btn btn-primary">
                     Submit

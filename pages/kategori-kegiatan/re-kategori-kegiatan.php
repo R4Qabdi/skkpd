@@ -15,7 +15,8 @@ if (isset($_GET['kode'])){
     <div class="row justify-content-center align-items-center g-2">
         <div class="col-2"></div>
         <div class="col-8">
-            <a name="" id="" class="btn btn-success m-auto" href="dashboard.php?page=in-kegiatan" role="button">Tambah
+            <a name="" id="" class="btn btn-success m-auto" href="dashboard.php?page=in-kategori-kegiatan"
+                role="button">Tambah
                 data</a>
             <div class="table-responsive-lg">
                 <table class="table table-striped table-borderless table-dark align-middle">
@@ -45,7 +46,7 @@ if (isset($_GET['kode'])){
                             <td><?=$data['sub_kategori']?></td>
                             <td colspan="2">
                                 <a id="" class="btn btn-warning"
-                                    href="dashboard.php?page=up-kategori&&kode=<?=$data['id_kategori']?>"
+                                    href="dashboard.php?page=up-kategori-kegiatan&&kode=<?=$data['id_kategori']?>"
                                     role="button">Update</a>
                             </td>
                         </tr>
@@ -83,7 +84,7 @@ if (isset($_GET['kode'])){
                             </td>
                             <td>
                                 <a id="" class="btn btn-warning"
-                                    href="dashboard.php?page=up-kegiatan&&kode=<?=$datag['id_kegiatan']?>"
+                                    href="dashboard.php?page=up-kategori-kegiatan&&kode=<?=$datag['id_kegiatan']?>"
                                     role="button">Update</a>
                             </td>
                         </tr>
