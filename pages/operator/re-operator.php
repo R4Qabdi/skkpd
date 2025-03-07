@@ -59,7 +59,7 @@ if (isset($_GET['kode'])){
                             </td>
                             <td>
                                 <a id="" class="btn btn-warning"
-                                    href="dashboard.php?page=up-operator&&kode=<?=$data['kode_operator']?>"
+                                    href="dashboard.php?page=up-operator&user=<?=$data['username']?>&kode=<?=$data['kode_operator']?>"
                                     role="button">Update</a>
                             </td>
                         </tr>

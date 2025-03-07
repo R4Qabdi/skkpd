@@ -2,6 +2,7 @@
     if(!@$_COOKIE['level_user']){
         echo"<script>alert('mohon login terlebih dahulu');window.location.href = 'stl-page/login.php';</script>";
     }
+    include"koneksi.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -178,6 +179,9 @@
             
             case "sertif":
                 include "pages/for-siswa/sertifikat.php";
+            break;
+            case "upload-sertifikat":
+                include "pages/for-siswa/in-sertifikat.php";
             break;
             case "pass":
                 include "pages/for-siswa/changepass.php";
