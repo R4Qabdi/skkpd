@@ -21,13 +21,12 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '') {
     $result = mysqli_query($koneksi, $query);
     
     if (mysqli_num_rows($result) > 0) {
-        echo "<div class='table-responsive'><table class='table table-bordered table-striped'>";
+        echo "<div class='table-responsive mt-3 mb-5'><table class='table table-bordered table-striped'>";
         echo "<thead class='thead-dark'>
                 <tr>
                     <th>Kategori</th>
                     <th>Sub Kategori</th>
                     <th>Jenis Kegiatan</th>
-                    <th>Nama Siswa</th>
                     <th>Angkatan</th>
                     <th>Status</th>
                     <th>Lihat Sertifikat</th>
@@ -39,7 +38,6 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '') {
                     <td>{$data['kategori']}</td>
                     <td>{$data['sub_kategori']}</td>
                     <td>{$data['jenis_kegiatan']}</td>
-                    <td>{$data['nama_siswa']}</td>
                     <td>{$data['angkatan']}</td>
                     <td>{$data['status']}</td>
                     <td><a href='dashboard.php?page=cek_sertifikat_siswa&id={$data['id_sertifikat']}&file={$data['sertifikat']}' target='_blank' class='btn btn-primary btn-sm'>Lihat File</a></td>
@@ -47,7 +45,7 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '') {
         }
         echo "</tbody></table></div>";
     } else {
-        echo "<p class='text-center'>Tidak ada data</p>";
+        echo "<p class='text-center mt-3 mb-5'>Tidak ada data</p>";
     }
 }
 ?>

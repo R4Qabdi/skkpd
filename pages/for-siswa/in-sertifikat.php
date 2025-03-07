@@ -183,3 +183,4 @@ function pilihJenisKegiatan(value) {
         `dashboard.php?page=upload-sertifikat&kategori=${kategori}&sub_kategori=${sub_kategori}&jenis_kegiatan=${value}`;
 }
 </script>
+<div class="m-5 p-5"></div>

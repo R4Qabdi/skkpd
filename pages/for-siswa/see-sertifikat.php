@@ -4,6 +4,7 @@ if(!@$_COOKIE['level_user']) {
 }elseif($_COOKIE['level_user']=='operator') {
     echo "<script>alert('anda operator, silahkan kembali');window.location.href='halaman_utama.php?page=sertifikat'</script>";
 }
+
 // Mengambil parameter dari URL
 if(isset($_GET['file'])){
     $pdfFile = $_GET['file'];
@@ -71,60 +72,51 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
     }
 }
 ?>
-
 <style>
-.container {
-    display: flex;
-    height: 100vh;
-}
-
 .pdf-container {
-    flex: 4;
-    border-right: 2px solid #ddd;
-    padding: 10px;
-}
-
-.pdf-container embed {
-    width: 100%;
-    height: 100vh;
-}
-
-.siswa-container {
-    flex: 1;
-    padding: 20px;
-    background-color: #f8f9fa;
+    /* Make the pdf-container wider */
+    height: 100%;
     overflow-y: auto;
+    border-right: 2px solid #ddd;
 }
 </style>
-
-<div class="container">
-    <div class="pdf-container">
-        <embed src="../sertifikat/<?= htmlspecialchars($pdfFile) ?>" type="application/pdf">
-    </div>
-
-    <div class="siswa-container">
-        <h3 class="text-warning"><?= htmlspecialchars($data["status"]) ?></h3>
-        <br><br>
-
-        <h3>Kategori Kegiatan</h3><br>
-        <p><strong>Kategori:</strong> <?= htmlspecialchars($data["kategori"]) ?></p>
-        <p><strong>Sub Kategori:</strong> <?= htmlspecialchars($data["sub_kategori"]) ?></p>
-        <p><strong>Kegiatan:</strong> <?= htmlspecialchars($data["jenis_kegiatan"]) ?></p><br><br>
-
-        <?php if ($data["status"] == "tidak valid"){ ?>
-        <div id="catatan-container">
-            <h3>Catatan</h3>
-            <textarea readonly name="catatan" class="form-control"
-                style="height: 150px"><?= htmlspecialchars($data["catatan"]) ?></textarea>
-        </div>
-        <form action="" method="POST" enctype="multipart/form-data" class="mt-3">
-            <div class="form-group">
-                <label for="sertifikat">Upload Ulang Sertifikat (PDF)</label>
-                <input type="file" class="form-control-file" accept=".pdf" name="sertifikat" required>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="pdf-container">
+                <embed src="sertifikat/<?= htmlspecialchars($pdfFile) ?>" type="application/pdf" width="100%"
+                    height="100%">
             </div>
-            <button type="submit" name="tombol_upload" class="btn btn-primary mt-3">Upload Ulang</button>
-        </form>
-        <?php } ?>
+        </div>
+        <div class="col-md-4">
+            <div class="siswa-container">
+                <h3 class="text-warning"><?= htmlspecialchars($data["status"]) ?></h3>
+                <br><br>
+
+                <h3>Kategori Kegiatan</h3><br>
+                <p><strong>Kategori:</strong> <?= htmlspecialchars($data["kategori"]) ?></p>
+                <p><strong>Sub Kategori:</strong> <?= htmlspecialchars($data["sub_kategori"]) ?></p>
+                <p><strong>Kegiatan:</strong> <?= htmlspecialchars($data["jenis_kegiatan"]) ?></p><br><br>
+
+                <?php if ($data["status"] == "tidak valid"){ ?>
+                <div id="catatan-container">
+                    <h3>Catatan</h3>
+                    <textarea readonly name="catatan" class="form-control"
+                        style="height: 150px"><?= htmlspecialchars($data["catatan"]) ?></textarea>
+                </div>
+                <form action="" method="POST" enctype="multipart/form-data" class="mt-3">
+                    <div class="form-group">
+                        <label for="sertifikat">Upload Ulang Sertifikat (PDF)</label>
+                        <input type="file" class="form-control-file" accept=".pdf" name="sertifikat" required>
+                    </div>
+                    <button type="submit" name="tombol_upload" class="btn btn-primary mt-3">Upload Ulang</button>
+                </form>
+                <?php } ?>
+
+                <a name="" id="" class="btn btn-primary" href="dashboard.php?page=sertif" role="button">Kembali ke Tabel
+                    Sertifikat</a>
+            </div>
+        </div>
     </div>
 </div>
 
