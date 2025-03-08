@@ -5,9 +5,9 @@ if (isset($_GET['kode'])){
     $result = mysqli_query($koneksi,"DELETE FROM tb_kegiatan WHERE id_kegiatan = '$id'");
     
     if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-kegiatan'; alert('data berhasil dihapus')</script>";
+        echo "<script> alert('data berhasil dihapus');window.location.href = 'dashboard.php?page=re-kategori-kegiatan';</script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-kegiatan'; alert('data gagal dihapus')</script>";
+        echo "<script>alert('data gagal dihapus'); window.location.href = 'dashboard.php?page=re-kategori-kegiatan'; </script>";
     }
 }
 ?>
@@ -70,7 +70,7 @@ if (isset($_GET['kode'])){
                                 if(!mysqli_num_rows($result) > 0){
                                 ?>
                                 <a name="hapus" id="" class="btn btn-danger"
-                                    href="dashboard.php?page=re-kegiatan&kode=<?= htmlspecialchars($datag['id_kegiatan']) ?>"
+                                    href="dashboard.php?page=re-kategori-kegiatan&kode=<?= htmlspecialchars($datag['id_kegiatan']) ?>"
                                     role="button"
                                     onclick="return confirm('Apakah anda yakin untuk menghapus data ini?')">Delete</a>
                                 <?php

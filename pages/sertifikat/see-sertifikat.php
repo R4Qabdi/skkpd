@@ -43,10 +43,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tombol_submit'])) {
 ?>
 <style>
 .pdf-container {
-    /* Make the pdf-container wider */
     height: 100%;
     overflow-y: auto;
     border-right: 2px solid #ddd;
+}
+
+.siswa-container {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.siswa-container h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.siswa-container p {
+    margin-bottom: 10px;
+}
+
+.siswa-container .btn {
+    margin-top: 10px;
 }
 </style>
 
@@ -59,23 +79,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tombol_submit'])) {
             </div>
         </div>
         <div class="col-md-4">
-            <div class="siswa-container p-3 bg-light">
-                <h3>Detail Siswa</h3><br>
+            <div class="siswa-container">
+                <h3>Detail Siswa</h3>
                 <p><strong>Nama:</strong> <?= htmlspecialchars($data["nama_siswa"]) ?></p>
                 <p><strong>NIS:</strong> <?= htmlspecialchars($data["nis"]) ?></p>
                 <p><strong>Kelas:</strong> <?= htmlspecialchars($data["jurusan"] . " " . $data["kelas"]) ?></p>
                 <p><strong>Telepon:</strong> <?= htmlspecialchars($data["telp"]) ?></p>
                 <p><strong>Email:</strong> <?= htmlspecialchars($data["email"]) ?></p>
                 <p><strong>Angkatan:</strong> <?= htmlspecialchars($data["angkatan"]) ?></p>
-                <br><br>
 
-                <h3>Kategori Kegiatan</h3><br>
+                <h3>Kategori Kegiatan</h3>
                 <p><strong>Kategori:</strong> <?= htmlspecialchars($data["kategori"]) ?></p>
                 <p><strong>Sub Kategori:</strong> <?= htmlspecialchars($data["sub_kategori"]) ?></p>
-                <p><strong>Kegiatan:</strong> <?= htmlspecialchars($data["jenis_kegiatan"]) ?></p><br><br>
+                <p><strong>Kegiatan:</strong> <?= htmlspecialchars($data["jenis_kegiatan"]) ?></p>
 
                 <?php if ($data["status"] == "menunggu validasi"){ ?>
-
                 <button id="btn-tidak-valid" type="button" class="btn btn-danger" onclick="toggleInvalid()">Tidak
                     Valid</button>
                 <button id="btn-batal" type="button" class="btn btn-secondary" style="display: none;"
@@ -94,10 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tombol_submit'])) {
                     <button type="submit" name="tombol_submit" id="btn-submit" class="btn btn-primary mt-3"
                         style="display: none;">Submit</button>
                 </form>
-
-                <?php }elseif ($data["status"] == "tidak valid"){ ?>
+                <?php } elseif ($data["status"] == "tidak valid"){ ?>
                 <div id="catatan-container">
-                    <textarea readonly name="catatan" class="form-control" placeholder="Tulis catatan di sini..."
+                    <textarea readonly name="catatan" class="form-control"
                         rows="4"><?= htmlspecialchars($data["catatan"]) ?></textarea>
                 </div>
                 <?php } ?>

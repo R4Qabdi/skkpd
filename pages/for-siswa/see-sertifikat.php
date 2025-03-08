@@ -111,7 +111,9 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
                     </div>
                     <button type="submit" name="tombol_upload" class="btn btn-primary mt-3">Upload Ulang</button>
                 </form>
-                <?php } ?>
+                <?php }else{ ?>
+                <div class="mb-5 mt-5 pb-5 pt-5"></div>
+                <?php }?>
 
                 <a name="" id="" class="btn btn-primary" href="dashboard.php?page=sertif" role="button">Kembali ke Tabel
                     Sertifikat</a>

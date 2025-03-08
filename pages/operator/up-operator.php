@@ -3,14 +3,14 @@ if (isset($_POST['submit'])){
     $getkode = $_GET['kode'];
     $userawal = $_GET['user'];
     
-    $nama = $_POST['nama'];
-    $user = $_POST['user'];
-
-    $pass = $_POST['pass'];
-    $konpass = $_POST['kpass'];
+    $nama = substr($_POST['nama'], 0, 64);
+    $user = substr($_POST['user'], 0, 32);
+    $pass = substr($_POST['pass'], 0, 64);
+    $konpass = substr($_POST['kpass'], 0, 64);
     
+    $resultp=1;
     if ($pass != '' || $konpass != '' ){
-        if($pass==$konpass){
+        if($pass == $konpass){
             $hashed = password_hash($pass , PASSWORD_DEFAULT);
             $resultp = mysqli_query($koneksi, "UPDATE tb_pengguna SET password = '$hashed', username='$user' WHERE username = '$user'");
         }else{
@@ -26,59 +26,63 @@ if (isset($_POST['submit'])){
     $alterAdd = mysqli_query($koneksi, "ALTER TABLE tb_pengguna ADD CONSTRAINT operator FOREIGN KEY (username) REFERENCES tb_operator(username)");
 
     if ($resultp && $alterDrop && $updateOperator && $updatePengguna && $alterAdd){
-        //logout
-        setcookie('nis', '', time()-1, '/');
-        setcookie('nama_lengkap', '', time()-1, '/');
-        setcookie('level_user', 'siswa', time()-1 , '/');
-        setcookie('username', '', time()-1, '/');
-        
-        $user_operator = $user;
-        $nama_operator = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT nama_lengkap FROM tb_operator WHERE username = '$user_operator'"));
-        setcookie('username', $data_operator['username'], time() + (60 * 60 * 24 * 7), '/');
-        setcookie('nama_lengkap', $nama_operator['nama_lengkap'], time() + (60 * 60 * 24 * 7), '/');
-        setcookie('level_user', 'operator', time() + (60 * 60 * 24 * 7), '/');
-        echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data berhasil masuk')</script>";
+        if ($userawal !== $user){
+            //logout
+            setcookie('nis', '', time(), '/');
+            setcookie('nama_lengkap', '', time(), '/');
+            setcookie('level_user', 'siswa', time() , '/');
+            setcookie('username', '', time(), '/');
+            
+            $user_operator = $user;
+            $nama_operator = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT nama_lengkap, username FROM tb_operator WHERE username = '$user_operator'"));
+            setcookie('username', $nama_operator['username'], time() + (60 * 60 * 24 * 7), '/');
+            setcookie('nama_lengkap', $nama_operator['nama_lengkap'], time() + (60 * 60 * 24 * 7), '/');
+            setcookie('level_user', 'operator', time() + (60 * 60 * 24 * 7), '/');
+            echo "<script>alert('berhasil');window.location.href='dashboard.php?page=home';</script>";
+        }
+        echo "<script>alert('data berhasil masuk');window.location.href = 'dashboard.php?page=re-operator'; </script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-operator'; alert('data gagal masuk')</script>";
+        echo "<script> alert('data gagal masuk');window.location.href = 'dashboard.php?page=re-operator';</script>";
     }
 }
 ?>
 
-<div class="container-lg">
-    <div class="row justify-content-center align-items-center g-2">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <form action="" method="post">
-                <?php
-                $getkode = $_GET['kode'];
-                $data=mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_operator WHERE kode_operator = '$getkode'"));
-                ?>
-                <div class="mb-3">
-                    <label for="" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control" name="nama" id="" aria-describedby="helpId" placeholder=""
-                        value="<?=$data['nama_lengkap']?>" />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Update Data Operator</h3>
+                    <form action="" method="post">
+                        <?php
+                        $getkode = $_GET['kode'];
+                        $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_operator WHERE kode_operator = '$getkode'"));
+                        ?>
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" name="nama" id="nama" maxlength="64"
+                                placeholder="Nama Lengkap" value="<?= htmlspecialchars($data['nama_lengkap']) ?>"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="user" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="user" id="user" maxlength="32"
+                                placeholder="Username" value="<?= htmlspecialchars($data['username']) ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pass" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="pass" id="pass" maxlength="64"
+                                placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="kpass" class="form-label">Konfirmasi Password</label>
+                            <input type="password" class="form-control" name="kpass" id="kpass" maxlength="64"
+                                placeholder="Konfirmasi Password">
+                        </div>
+                        <button name="submit" type="submit" class="btn btn-primary w-100">Submit</button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="user" id="" aria-describedby="helpId" placeholder=""
-                        value="<?=$data['username']?>" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Password</label>
-                    <input type="text" class="form-control" name="pass" id="" aria-describedby="helpId"
-                        placeholder="" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Konfirmasi Password</label>
-                    <input type="text" class="form-control" name="kpass" id="" aria-describedby="helpId"
-                        placeholder="" />
-                </div>
-                <button name="submit" type="submit" class="btn btn-primary">
-                    Submit
-                </button>
-
-            </form>
+            </div>
         </div>
-        <div class="col-2"></div>
     </div>
 </div>

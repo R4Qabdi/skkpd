@@ -1,34 +1,12 @@
 <?php
- 
 if(isset($_POST['submit'])){
-    $nis = $_POST['nis'];
-    if (strlen($nis)>4){
-        //ignore
-    }
-    $absen = $_POST['absen'];
-    if (strlen($absen)>4){
-        //ignore
-    }
-    $nama = $_POST['nama'];
-    if (strlen($absen)>4){
-        //ignore
-    }
-    $telp = $_POST['telp'];
-    if (strlen($absen)>4){
-        //ignore
-    }
-    $email = $_POST['email'];
-    if (strlen($absen)>4){
-        //ignore
-    }
-    $kelas = $_POST['kelas'];
-    if (strlen($absen)>4){
-        //ignore
-    }
+    $nis = substr($_POST['nis'], 0, 5);
+    $absen = substr($_POST['absen'], 0, 2);
+    $nama = substr($_POST['nama'], 0, 100);
+    $telp = substr($_POST['telp'], 0, 20);
+    $email = substr($_POST['email'], 0, 36);
+    $kelas = substr($_POST['kelas'], 0, 5);
     $angkatan = $_POST['angkatan'];
-    if (strlen($absen)>4){
-        //ignore
-    }
     $jurusan = $_POST['jurusan'];
 
     if ($lancar = true){
@@ -43,87 +21,80 @@ if(isset($_POST['submit'])){
         $result = false;
     }
 
-
     if ($result){
         echo"<script>window.location.href = 'dashboard.php?page=re-siswa'</script>";
     }else{
         echo"<script>alert('data gagal masuk'); window.location.href = 'dashboard.php?page=in-siswa'</script>";
-        // if (false) {echo"gaguna";}
     }
 }
 ?>
-<div class="container-lg">
-    <div class="row justify-content-center align-items-center g-2">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <form action="" method="post">
-                <div class="mb-3">
-                    <label for="" class="form-label">NIS</label>
-                    <input type="number" class="form-control" name="nis" id="" aria-describedby="helpId"
-                        placeholder="NIS" />
-                    <?php
-                        function nisp($msg,$con){
-                        if ($con){
-                    ?>
-                    <small id="helpId" class="form-text text-muted"><?=$msg?></small>
-                    <?php
-                        }}
-                    ?>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Input Data Siswa</h3>
+                    <form action="" method="post">
+                        <div class="mb-3">
+                            <label for="nis" class="form-label">NIS</label>
+                            <input type="number" class="form-control" name="nis" id="nis" maxlength="5"
+                                placeholder="NIS" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="absen" class="form-label">Absen</label>
+                            <input type="number" class="form-control" name="absen" id="absen" maxlength="2"
+                                placeholder="Nomor Absen" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Siswa</label>
+                            <input type="text" class="form-control" name="nama" id="nama" maxlength="100"
+                                placeholder="Nama Siswa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telp" class="form-label">Nomor Telepon</label>
+                            <input type="text" class="form-control" name="telp" id="telp" maxlength="20"
+                                placeholder="Nomor Telepon" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" maxlength="36"
+                                placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kelas" class="form-label">Kelas</label>
+                            <input type="text" class="form-control" name="kelas" id="kelas" maxlength="5"
+                                placeholder="X/XI/XII" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="angkatan" class="form-label">Angkatan</label>
+                            <select class="form-select" name="angkatan" id="angkatan" required>
+                                <option value="" selected disabled>Pilih Angkatan</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jurusan" class="form-label">Jurusan</label>
+                            <select class="form-select" name="jurusan" id="jurusan" required>
+                                <option value="" selected disabled>Pilih Jurusan</option>
+                                <?php
+                                $data_jurusan = mysqli_query($koneksi, "SELECT * from tb_jurusan");
+                                while($data = mysqli_fetch_assoc($data_jurusan)){
+                                ?>
+                                <option value="<?= htmlspecialchars($data['id_jurusan']) ?>">
+                                    <?= htmlspecialchars($data['jurusan']) ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary w-100" name="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Absen</label>
-                    <input type="number" class="form-control" name="absen" id="" aria-describedby="helpId"
-                        placeholder="nomor absen" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Nama siswa</label>
-                    <input type="text" class="form-control" name="nama" id="" aria-describedby="helpId"
-                        placeholder="" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Nomor Telepon </label>
-                    <input type="text" class="form-control" name="telp" id="" aria-describedby="helpId"
-                        placeholder="no. telp" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="" aria-describedby="helpId"
-                        placeholder="Email" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Kelas</label>
-                    <input type="text" class="form-control" name="kelas" id="" aria-describedby="helpId"
-                        placeholder="X/XI/XII" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Angkatan</label>
-                    <input type="text" class="form-control" name="angkatan" id="" aria-describedby="helpId"
-                        placeholder="2024/2025" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Jurusan</label>
-                    <select class="form-select form-select-lg" name="jurusan" id="">
-                        <option selected>Pilih jurusan</option>
-                        <?php
-                         
-                        
-                        $data_jurusan = mysqli_query($koneksi, "SELECT * from tb_jurusan");
-                        
-                        while($data = mysqli_fetch_assoc($data_jurusan)){
-                        ?>
-                        <option value="<?=$data['id_jurusan']?>"><?=$data['jurusan']?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary" name="submit">
-                        Submit
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
-        <div class="col-2"></div>
     </div>
 </div>

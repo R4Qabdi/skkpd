@@ -44,35 +44,59 @@ $level = $_COOKIE['level_user'];
 if($level == 'operator'){
 ?>
     <!-- Dashboard for Operator -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="dashboard.php?page=home"><?=$_COOKIE['username']?></a>
+            <a class="navbar-brand" href="dashboard.php?page=home">
+                <img src="gambar/logoti.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+            </a>
+            <a class="navbar-brand" href="dashboard.php?page=home">
+                <b>
+                    SKKPd
+                </b>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php?page=home" aria-current="page">Home</a>
+                        <a class="nav-link active" href="dashboard.php?page=home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php?page=re-siswa"> Siswa</a>
+                        <a class="nav-link" href="dashboard.php?page=re-siswa">Siswa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php?page=re-sertifikat"> Sertifikat</a>
+                        <a class="nav-link" href="dashboard.php?page=re-operator">Operator</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php?page=re-jurusan"> Jurusan</a>
+                        <a class="nav-link" href="dashboard.php?page=re-jurusan">Jurusan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php?page=re-kategori-kegiatan"> Kategori Kegiatan</a>
+                        <a class="nav-link" href="dashboard.php?page=re-sertifikat">Sertifikat</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="stl-page/login.php">Login</a>
+                        <a class="nav-link" href="dashboard.php?page=re-kategori-kegiatan">Kategori Kegiatan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="stl-page/logout.php">Logout</a>
+                        <a class="nav-link" href="#"><i class="bi bi-bell"></i> Notifications</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> <?=$_COOKIE['username']?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="dashboard.php?page=up-operator&user=<?=$_COOKIE['username']?>&kode=<?php 
+                                    $username = $_COOKIE['username'];
+                                    $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT kode_operator FROM tb_operator WHERE username = '$username'"));
+                                    echo $data['kode_operator'];
+                                    ?>">Data Diri</a>
+                            </li>
+                            <li><a class="dropdown-item" href="stl-page/login.php">Login</a></li>
+                            <li><a class="dropdown-item" href="stl-page/logout.php">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -110,23 +134,6 @@ if($level == 'operator'){
         case "up-operator":
             include "pages/operator/up-operator.php";
         break;
-
-
-        case "in-pengguna":
-            include "pages/pengguna/in-pengguna.php";
-        break;
-        case "re-pengguna":
-            include "pages/pengguna/re-pengguna.php";
-        break;
-        case "up-pengguna":
-            include "pages/pengguna/up-pengguna.php";
-        break;
-        case "up-pengguna-siswa":
-            include "pages/pengguna/up-pengguna-siswa.php";
-        break;
-        case "up-pengguna-op":
-            include "pages/pengguna/up-pengguna-operator.php";
-        break;
         
         case "in-jurusan":
             include "pages/jurusan/in-jurusan.php";
@@ -144,11 +151,11 @@ if($level == 'operator'){
         case "re-sertifikat":
             include "pages/sertifikat/re-sertifikat.php";
         break;
+        case "st-sertifikat":
+            include "pages/sertifikat/st-sertifikat.php";
+        break;
         case "see-sertifikat":
             include "pages/sertifikat/see-sertifikat.php";
-        break;
-        case "up-sertifikat":
-            include "pages/sertifikat/up-sertifikat.php";
         break;
         
         case "in-kategori-kegiatan":
@@ -166,29 +173,46 @@ if($level == 'operator'){
 }else if ($level == 'siswa'){
 ?>
     <!-- Dashboard for Siswa -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="dashboard.php?page=home"><?=$_COOKIE['nis']?></a>
+            <a class="navbar-brand" href="dashboard.php?page=home">
+                <img src="gambar/logoti.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+            </a>
+            <a class="navbar-brand" href="dashboard.php?page=home">
+                <b>
+                    SKKPd
+                </b>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php?page=home" aria-current="page">Home</a>
+                        <a class="nav-link active" href="dashboard.php?page=home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php?page=sertif"> Sertifikat</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php?page=pass">Ganti Password</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="stl-page/login.php">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="stl-page/logout.php">Logout</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                            <?php
+                            if(@$_COOKIE['nis']){
+                                $nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT nama_siswa FROM tb_siswa WHERE nis='$_COOKIE[nis]'"))['nama_siswa'];
+                                echo $nama;
+                            }
+                            ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="dashboard.php?page=pass">Ganti Password</a>
+                            </li>
+                            <li><a class="dropdown-item" href="stl-page/login.php">Login</a></li>
+                            <li><a class="dropdown-item" href="stl-page/logout.php">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -223,7 +247,7 @@ if($level == 'operator'){
 ?>
 
     <!-- Custom Footer -->
-    <footer class="bg-primary text-white text-center py-3">
+    <footer class="bg-dark text-white text-center py-3">
         <div class="container">
             <p>&copy; 2025 Qwentifer. All rights reserved.</p>
             <p>Follow me on:

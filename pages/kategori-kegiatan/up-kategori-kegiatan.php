@@ -4,10 +4,10 @@ if(@$_GET['kegiatan']){
     $data_update = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_kategori INNER JOIN tb_kegiatan USING(id_kategori) WHERE id_kegiatan='$id_kegiatan'"));
 
     if(isset($_POST['tombol_update'])){
-        $kegiatan       = htmlspecialchars($_POST['kegiatan']);
+        $kegiatan       = substr(htmlspecialchars($_POST['kegiatan']), 0, 32);
         $kategori       = htmlspecialchars($_POST['kategori']);
-        $sub_kategori   = htmlspecialchars($_POST['sub_kategori']);
-        $point          = htmlspecialchars($_POST['point']);
+        $sub_kategori   = substr(htmlspecialchars($_POST['sub_kategori']), 0, 64);
+        $point          = substr(htmlspecialchars($_POST['point']), 0, 32);
         
         $hasil = mysqli_query($koneksi, "UPDATE tb_kegiatan SET jenis_kegiatan='$kegiatan', angka_kredit='$point' WHERE id_kegiatan = '$id_kegiatan'");    
 
@@ -29,22 +29,22 @@ if(@$_GET['kegiatan']){
                         <div class="mb-3">
                             <label for="kategori" class="form-label">Kategori</label>
                             <input type="text" class="form-control" name="kategori" readonly
-                                value="<?= $data_update['kategori'] ?>" required>
+                                value="<?= htmlspecialchars($data_update['kategori']) ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="sub_kategori" class="form-label">Sub Kategori</label>
                             <input type="text" class="form-control" name="sub_kategori" readonly
-                                value="<?= $data_update['sub_kategori'] ?>" required>
+                                value="<?= htmlspecialchars($data_update['sub_kategori']) ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="kegiatan" class="form-label">Nama Kegiatan</label>
-                            <input type="text" class="form-control" name="kegiatan"
-                                value="<?= $data_update['jenis_kegiatan'] ?>" autofocus required>
+                            <input type="text" class="form-control" name="kegiatan" maxlength="32"
+                                value="<?= htmlspecialchars($data_update['jenis_kegiatan']) ?>" autofocus required>
                         </div>
                         <div class="mb-3">
                             <label for="point" class="form-label">Angka Kredit / Point</label>
-                            <input type="number" class="form-control" name="point"
-                                value="<?= $data_update['angka_kredit'] ?>" required>
+                            <input type="number" class="form-control" name="point" maxlength="32"
+                                value="<?= htmlspecialchars($data_update['angka_kredit']) ?>" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100" name="tombol_update">Update</button>
                     </form>
@@ -60,7 +60,7 @@ if(@$_GET['kegiatan']){
     $data_update = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori='$id_kategori'"));
 
     if(isset($_POST['tombol_update'])){
-        $sub_kategori   = htmlspecialchars($_POST['sub_kategori']);
+        $sub_kategori   = substr(htmlspecialchars($_POST['sub_kategori']), 0, 64);
         
         $hasil = mysqli_query($koneksi, "UPDATE tb_kategori SET sub_kategori='$sub_kategori' WHERE id_kategori = '$id_kategori'");    
 
@@ -81,12 +81,12 @@ if(@$_GET['kegiatan']){
                         <div class="mb-3">
                             <label for="kategori" class="form-label">Kategori</label>
                             <input type="text" class="form-control" name="kategori" readonly
-                                value="<?= $data_update['kategori'] ?>" required>
+                                value="<?= htmlspecialchars($data_update['kategori']) ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="sub_kategori" class="form-label">Sub Kategori</label>
-                            <input type="text" class="form-control" name="sub_kategori" autofocus
-                                value="<?= $data_update['sub_kategori'] ?>" required>
+                            <input type="text" class="form-control" name="sub_kategori" maxlength="64" autofocus
+                                value="<?= htmlspecialchars($data_update['sub_kategori']) ?>" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100" name="tombol_update">Update</button>
                     </form>
