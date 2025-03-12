@@ -2,8 +2,8 @@
 if (isset($_GET['nis'])){
     
     $ceknis = $_GET['nis'];
-    $result = mysqli_query($koneksi, "DELETE FROM tb_siswa WHERE nis='$ceknis'");
     $resultp = mysqli_query($koneksi, "DELETE FROM tb_pengguna where nis='$ceknis'");
+    $result = mysqli_query($koneksi, "DELETE FROM tb_siswa WHERE nis='$ceknis'");
     if($result * $resultp){
         echo "<script>alert('data berhasil dihapus!'); window.location.href = 'dashboard.php?page=re-siswa';</script>";
     }else{

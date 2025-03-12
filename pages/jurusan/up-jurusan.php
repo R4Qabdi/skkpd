@@ -6,9 +6,9 @@ if (isset($_POST['submit'])){
     $result = mysqli_query($koneksi, "UPDATE tb_jurusan SET jurusan = '$jurusan' WHERE id_jurusan = '$kode'");
 
     if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-jurusan'; alert('data berhasil diupdate')</script>";
+        echo "<script>alert('data berhasil diupdate'); window.location.href = 'dashboard.php?page=re-jurusan'; </script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-jurusan'; alert('data gagal diupdate')</script>";
+        echo "<script>alert('data gagal diupdate'); window.location.href = 'dashboard.php?page=re-jurusan'; </script>";
     }
 }
 ?>

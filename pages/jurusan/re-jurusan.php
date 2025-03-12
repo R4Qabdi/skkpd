@@ -5,9 +5,9 @@ if (isset($_GET['kode'])){
     $result = mysqli_query($koneksi,"DELETE FROM tb_jurusan WHERE id_jurusan = '$id'");
     
     if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-jurusan'; alert('data berhasil dihapus')</script>";
+        echo "<script>alert('data berhasil dihapus');window.location.href = 'dashboard.php?page=re-jurusan'; </script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-jurusan'; alert('data gagal dihapus')</script>";
+        echo "<script>alert('data gagal dihapus'); window.location.href = 'dashboard.php?page=re-jurusan'; </script>";
     }
 }
 ?>

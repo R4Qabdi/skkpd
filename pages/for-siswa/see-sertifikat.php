@@ -74,10 +74,30 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
 ?>
 <style>
 .pdf-container {
-    /* Make the pdf-container wider */
     height: 100%;
     overflow-y: auto;
     border-right: 2px solid #ddd;
+}
+
+.siswa-container {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.siswa-container h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.siswa-container p {
+    margin-bottom: 10px;
+}
+
+.siswa-container .btn {
+    margin-top: 10px;
 }
 </style>
 <div class="container-fluid">
@@ -114,9 +134,6 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
                 <?php }else{ ?>
                 <div class="mb-5 mt-5 pb-5 pt-5"></div>
                 <?php }?>
-
-                <a name="" id="" class="btn btn-primary" href="dashboard.php?page=sertif" role="button">Kembali ke Tabel
-                    Sertifikat</a>
             </div>
         </div>
     </div>

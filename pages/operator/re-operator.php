@@ -2,9 +2,16 @@
 if (isset($_GET['kode'])){
     $id = $_GET['kode'];
 
+    $data_operator = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT username FROM tb_operator WHERE kode_operator = '$id'"));
+
+    // $alterDrop = mysqli_query($koneksi, "ALTER TABLE tb_pengguna DROP CONSTRAINT operator");
+    $resultp = mysqli_query($koneksi,"DELETE FROM tb_pengguna where username = '$data_operator[username]'");
     $result = mysqli_query($koneksi,"DELETE FROM tb_operator where kode_operator = '$id'");
-    $resultp = mysqli_query($koneksi,"DELETE FROM tb_pengguna where kode_operator = '$id'");
+    // $alterAdd = mysqli_query($koneksi, "ALTER TABLE tb_pengguna ADD CONSTRAINT operator FOREIGN KEY (username) REFERENCES tb_operator(username)");
     
+    if ($data_operator['username'] == $_COOKIE['username']) {
+        echo "<script>alert('data berhasil dihapus');window.location.href = 'stl-page/logout.php'; </script>";
+    }
     if ($result*$resultp){
         echo "<script>alert('data berhasil dihapus');window.location.href = 'dashboard.php?page=re-operator'; </script>";
     }else{
@@ -38,23 +45,10 @@ if (isset($_GET['kode'])){
                             <td><?= htmlspecialchars($data['nama_lengkap']) ?></td>
                             <td><?= htmlspecialchars($data['username']) ?></td>
                             <td>
-                                <?php
-                                $cekkey = $data['username'];
-                                $result = mysqli_query($koneksi, "SELECT username FROM tb_operator INNER JOIN tb_pengguna USING(username) WHERE username = '$cekkey'");
-                                if(!mysqli_num_rows($result) > 0){
-                                ?>
                                 <a name="hapus" id="" class="btn btn-danger"
                                     href="dashboard.php?page=re-operator&kode=<?= htmlspecialchars($data['kode_operator']) ?>"
                                     role="button"
                                     onclick="return confirm('Apakah anda yakin untuk menghapus data ini?')">Delete</a>
-                                <?php
-                                }else{
-                                ?>
-                                <a name="" id="" class="btn btn-danger" href="" role="button"
-                                    onclick="return alert('Hapus data pengguna terlebih dahulu')">Delete</a>
-                                <?php
-                                }
-                                ?>
                             </td>
                             <td>
                                 <a id="" class="btn btn-warning"

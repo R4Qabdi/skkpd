@@ -10,9 +10,9 @@ if (isset($_POST['submit'])){
     $result = mysqli_query($koneksi, "INSERT INTO tb_jurusan VALUES ('$id','$jurusan')");
 
     if ($result){
-        echo "<script>window.location.href = 'dashboard.php?page=re-jurusan'; alert('data berhasil masuk')</script>";
+        echo "<script>alert('data berhasil masuk'); window.location.href = 'dashboard.php?page=re-jurusan';</script>";
     }else{
-        echo "<script>window.location.href = 'dashboard.php?page=re-jurusan'; alert('data gagal masuk')</script>";
+        echo "<script>alert('data gagal masuk'); window.location.href = 'dashboard.php?page=re-jurusan'; </script>";
     }
 }
 ?>

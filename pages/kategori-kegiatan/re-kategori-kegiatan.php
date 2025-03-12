@@ -76,7 +76,7 @@ if (isset($_GET['kode'])){
                                 <?php
                                 }else{
                                 ?>
-                                <a name="" id="" class="btn btn-danger" href="" role="button"
+                                <a name="" id="" class="btn btn-danger active" href="" role="button" disabled
                                     onclick="return alert('Hapus data sertifikat terlebih dahulu')">Delete</a>
                                 <?php
                                 }

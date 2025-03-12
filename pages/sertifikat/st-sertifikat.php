@@ -1,9 +1,4 @@
 <?php
-if(!@$_COOKIE['level_user']) {
-    echo "<script>alert('belum login');window.location.href='../login.php'</script>";
-}elseif($_COOKIE['level_user']=='siswa') {
-    echo "<script>alert('anda siswa, silahkan kembali');window.location.href='halaman_utama.php?page=sertifikat_siswa'</script>";
-}
 
 // Fungsi untuk mendapatkan data sertifikat berdasarkan status dan kegiatan
 function getSertifikat($koneksi, $status = '', $kegiatan = '') {

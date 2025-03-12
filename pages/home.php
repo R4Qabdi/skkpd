@@ -4,6 +4,7 @@ $siswaCount = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as coun
 $jurusanCount = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_jurusan"))['count'];
 $kegiatanCount = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_kegiatan INNER JOIN tb_kategori USING(id_kategori)"))['count'];
 $sertifikatCount = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_sertifikat WHERE status='menunggu validasi'"))['count'];
+$kategoriCount = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_kategori"))['count'];
 ?>
 
 <div class="container-lg mt-5">
@@ -47,7 +48,9 @@ $sertifikatCount = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as
                 <div class="card-header">Jumlah Kegiatan</div>
                 <div class="card-body">
                     <h5 class="card-title"><?= $kegiatanCount ?></h5>
-                    <p class="card-text">Total kegiatan berdasarkan kategori.</p>
+                    <p class="card-text">Total kegiatan.</p>
+                    <h5 class="card-title"><?= $kategoriCount ?></h5>
+                    <p class="card-text">Total kategori kegiatan.</p>
                 </div>
             </div>
         </div>

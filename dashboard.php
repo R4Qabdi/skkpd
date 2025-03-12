@@ -41,6 +41,7 @@ include "koneksi.php";
 <body>
     <?php
 $level = $_COOKIE['level_user'];
+
 if($level == 'operator'){
 ?>
     <!-- Dashboard for Operator -->
@@ -79,8 +80,27 @@ if($level == 'operator'){
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php?page=re-kategori-kegiatan">Kategori Kegiatan</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-bell"></i> Notifications</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bell"></i> Notifications
+                            <?php
+                            $notif_count = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_notifikasi WHERE status = 'unread'"))['count'];
+                            if ($notif_count > 0) {
+                                echo "<span class='badge bg-danger'>$notif_count</span>";
+                            }
+                            ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            <?php
+                            $notifications = mysqli_query($koneksi, "SELECT * FROM tb_notifikasi ORDER BY tanggal DESC LIMIT 5");
+                            while ($notif = mysqli_fetch_assoc($notifications)) {
+                                echo "<li><a class='dropdown-item' href='dashboard.php?page=re-sertifikat&notif_id={$notif['id_notifikasi']}'>{$notif['pesan']}</a></li>";
+                            }
+                            ?>
+                            <li><a class="dropdown-item text-center" href="dashboard.php?page=all-notif">View All</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -110,6 +130,9 @@ if($level == 'operator'){
         break;
         default:
             include "pages/notfound.php";
+        break;
+        case "all-notif":
+            include "pages/all-notifications.php";
         break;
         
         case "in-siswa":
@@ -167,6 +190,10 @@ if($level == 'operator'){
         case "up-kategori-kegiatan":
             include "pages/kategori-kegiatan/up-kategori-kegiatan.php";
         break;
+    }
+    if (isset($_GET['notif_id'])) {
+        $notif_id = $_GET['notif_id'];
+        mysqli_query($koneksi, "UPDATE tb_notifikasi SET status = 'read' WHERE id_notifikasi = $notif_id");
     }
     ?>
     <?php
@@ -251,9 +278,11 @@ if($level == 'operator'){
         <div class="container">
             <p>&copy; 2025 Qwentifer. All rights reserved.</p>
             <p>Follow me on:
-                <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-2"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100086204222090" class="text-white me-2"><i
+                        class="bi bi-facebook"></i></a>
+                <a href="https://x.com/realjasj" class="text-white me-2"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.instagram.com/abdi_kesawa/" class="text-white me-2"><i
+                        class="bi bi-instagram"></i></a>
                 <a href="https://github.com/R4Qabdi/" class="text-white me-2"><i class="bi bi-github"></i></a>
             </p>
         </div>

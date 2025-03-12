@@ -35,6 +35,10 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
 
             $id = mysqli_fetch_row(mysqli_query($koneksi, "SELECT LAST_INSERT_ID()"))[0];
             
+            // Insert notification
+            $message = "Siswa dengan NIS $nis telah mengunggah sertifikat baru.";
+            mysqli_query($koneksi, "INSERT INTO tb_notifikasi VALUES (null, NOW(), 'unread', '$message')");
+
             if ($hasil) {
                 echo "<script>alert('Berhasil Mengunggah Sertifikat');window.location.href='dashboard.php?page=cek_sertifikat_siswa&id=".$id."&file=".$newFileName."'</script>";
             } else {

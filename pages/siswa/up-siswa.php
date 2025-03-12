@@ -13,6 +13,7 @@ if(isset($_POST['submit'])){
     
     $pass = substr($_POST['pass'], 0, 64);
     $konpass = substr($_POST['konpass'], 0, 64);
+    $resultp = true; // Initialize $resultp to true
     if ($pass != '' || $konpass != '' ){
         if($pass == $konpass){
             $hashed = password_hash($pass , PASSWORD_DEFAULT);

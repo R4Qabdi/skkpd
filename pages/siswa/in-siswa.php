@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
     }
 
     if ($result){
-        echo"<script>window.location.href = 'dashboard.php?page=re-siswa'</script>";
+        echo"<script>alert('data berhasil masuk'); window.location.href = 'dashboard.php?page=re-siswa'</script>";
     }else{
         echo"<script>alert('data gagal masuk'); window.location.href = 'dashboard.php?page=in-siswa'</script>";
     }
@@ -62,8 +62,12 @@ if(isset($_POST['submit'])){
                         </div>
                         <div class="mb-3">
                             <label for="kelas" class="form-label">Kelas</label>
-                            <input type="text" class="form-control" name="kelas" id="kelas" maxlength="5"
-                                placeholder="X/XI/XII" required>
+                            <select class="form-select" name="kelas" id="kelas" required>
+                                <option value="" selected disabled>Pilih Kelas</option>
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="angkatan" class="form-label">Angkatan</label>
