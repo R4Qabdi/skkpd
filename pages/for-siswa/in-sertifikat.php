@@ -37,7 +37,8 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
             
             // Insert notification
             $message = "Siswa dengan NIS $nis telah mengunggah sertifikat baru.";
-            mysqli_query($koneksi, "INSERT INTO tb_notifikasi VALUES (null, NOW(), 'unread', '$message')");
+            $id_pengguna = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT id_pengguna FROM tb_pengguna WHERE nis = '$nis'"))['id_pengguna'];
+            mysqli_query($koneksi, "INSERT INTO tb_notifikasi VALUES (null, NOW(), 'unread', '$message', '$id_pengguna')");
 
             if ($hasil) {
                 echo "<script>alert('Berhasil Mengunggah Sertifikat');window.location.href='dashboard.php?page=cek_sertifikat_siswa&id=".$id."&file=".$newFileName."'</script>";
@@ -187,4 +188,4 @@ function pilihJenisKegiatan(value) {
         `dashboard.php?page=upload-sertifikat&kategori=${kategori}&sub_kategori=${sub_kategori}&jenis_kegiatan=${value}`;
 }
 </script>
-<div class="m-5 p-5"></div>
+<div class="m-5"></div>

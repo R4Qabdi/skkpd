@@ -45,6 +45,16 @@ if (isset($_POST['submit'])){
         echo "<script> alert('data gagal masuk');window.location.href = 'dashboard.php?page=re-operator';</script>";
     }
 }
+
+if (isset($_POST['delete'])) {
+    $getkode = $_GET['kode'];
+    $data_operator = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT username FROM tb_operator WHERE kode_operator = '$getkode'"));
+
+    $resultp = mysqli_query($koneksi,"DELETE FROM tb_pengguna where username = '$data_operator[username]'");
+    $result = mysqli_query($koneksi,"DELETE FROM tb_operator where kode_operator = '$getkode'");
+
+    echo "<script>alert('data berhasil dihapus');window.location.href = 'stl-page/logout.php'; </script>";
+}
 ?>
 
 <div class="container mt-5">
@@ -80,8 +90,45 @@ if (isset($_POST['submit'])){
                                 placeholder="Konfirmasi Password">
                         </div>
                         <button name="submit" type="submit" class="btn btn-primary w-100">Submit</button>
+                        <button onclick="return confirm('apakah anda yakin untuk menghapus akun ini?');" name="delete"
+                            type="submit" class="btn btn-danger w-100 mt-2">Delete</button>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-4">
+            <a name="" id="" class="btn btn-success" href="dashboard.php?page=in-operator" role="button">Tambah Data</a>
+        </div>
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Kode Operator</th>
+                            <th>Nama Panjang</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $data_operator = mysqli_query($koneksi, "SELECT * FROM tb_operator");
+                        while ($data = mysqli_fetch_assoc($data_operator)){
+                        ?>
+                        <tr class="table-light">
+                            <td scope="row"><?= htmlspecialchars($data['kode_operator']) ?></td>
+                            <td><?= htmlspecialchars($data['nama_lengkap']) ?></td>
+                            <td><?= htmlspecialchars($data['username']) ?></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

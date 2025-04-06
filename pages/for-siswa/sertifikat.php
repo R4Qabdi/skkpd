@@ -21,26 +21,31 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '') {
     $result = mysqli_query($koneksi, $query);
     
     if (mysqli_num_rows($result) > 0) {
-        echo "<div class='table-responsive mt-3 mb-5'><table class='table table-bordered table-striped'>";
-        echo "<thead class='thead-dark'>
-                <tr>
-                    <th>Kategori</th>
-                    <th>Sub Kategori</th>
-                    <th>Jenis Kegiatan</th>
-                    <th>Angkatan</th>
-                    <th>Status</th>
-                    <th>Lihat Sertifikat</th>
-                </tr>
-              </thead><tbody>";
+        echo "<div class='table-responsive mt-3 mb-5'>
+                <table class='table table-bordered table-striped table-hover'>
+                  <thead class='table-primary'>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Sub Kategori</th>
+                        <th>Jenis Kegiatan</th>
+                        <th>Angkatan</th>
+                        <th>Status</th>
+                        <th>Lihat Sertifikat</th>
+                    </tr>
+                  </thead>
+                  <tbody>";
         
         while ($data = mysqli_fetch_assoc($result)) {
             echo "<tr>
-                    <td>{$data['kategori']}</td>
-                    <td>{$data['sub_kategori']}</td>
-                    <td>{$data['jenis_kegiatan']}</td>
-                    <td>{$data['angkatan']}</td>
-                    <td>{$data['status']}</td>
-                    <td><a href='dashboard.php?page=cek_sertifikat_siswa&id={$data['id_sertifikat']}&file={$data['sertifikat']}' target='_blank' class='btn btn-primary btn-sm'>Lihat File</a></td>
+                    <td class='text-center'>{$data['kategori']}</td>
+                    <td class='text-center'>{$data['sub_kategori']}</td>
+                    <td class='text-center'>{$data['jenis_kegiatan']}</td>
+                    <td class='text-center'>{$data['angkatan']}</td>
+                    <td class='text-center'>{$data['status']}</td>
+                    <td class='text-center'>
+                        <a href='dashboard.php?page=cek_sertifikat_siswa&id={$data['id_sertifikat']}&file={$data['sertifikat']}' 
+                           target='_blank' class='btn btn-primary btn-sm'>Lihat File</a>
+                    </td>
                   </tr>";
         }
         echo "</tbody></table></div>";
@@ -74,7 +79,7 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '') {
                                     echo intval($total_point) . "/30 Point";
                                     
                                     if ($total_point >= 30) {
-                                        echo "<br><a href='../cetak/sertifikat_skkpd/generate_sertifikat.php' class='btn btn-success btn-sm mt-2'>Cetak Sertifikat SKKPd</a>";
+                                        echo "<br><a href='cetak/sertifikat_skkpd/generate_sertifikat.php' class='btn btn-success btn-sm mt-2'>Cetak Sertifikat SKKPd</a>";
                                     }
                                     ?>
                                 </td>

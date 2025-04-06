@@ -24,42 +24,53 @@ $kategoriCount = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as c
         </div>
         <div class="col-2"></div>
     </div>
-    <div class="row mt-5">
+</div>
+
+<?php
+if (@$_COOKIE['nis']) {
+    $nis = $_COOKIE['nis'];
+    $totalSertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_sertifikat WHERE nis='$nis'"))['count'];
+    $validSertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_sertifikat WHERE nis='$nis' AND status='valid'"))['count'];
+    $tidakValidSertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_sertifikat WHERE nis='$nis' AND status='tidak valid'"))['count'];
+    $menungguValidasiSertifikat = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as count FROM tb_sertifikat WHERE nis='$nis' AND status='menunggu validasi'"))['count'];
+}
+?>
+
+<div class="container mt-5">
+    <div class="row">
         <div class="col-md-3">
             <div class="card text-white bg-primary mb-3">
-                <div class="card-header">Jumlah Siswa</div>
+                <div class="card-header">Total Sertifikat</div>
                 <div class="card-body">
-                    <h5 class="card-title"><?= $siswaCount ?></h5>
-                    <p class="card-text">Total siswa yang terdaftar.</p>
+                    <p class="card-text">Jumlah total sertifikat yang Anda miliki.</p>
+                    <p class="card-text"><?= $totalSertifikat ?? 0 ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card text-white bg-success mb-3">
-                <div class="card-header">Jumlah Jurusan</div>
+                <div class="card-header">Sertifikat Valid</div>
                 <div class="card-body">
-                    <h5 class="card-title"><?= $jurusanCount ?></h5>
-                    <p class="card-text">Total jurusan yang tersedia.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-white bg-warning mb-3">
-                <div class="card-header">Jumlah Kegiatan</div>
-                <div class="card-body">
-                    <h5 class="card-title"><?= $kegiatanCount ?></h5>
-                    <p class="card-text">Total kegiatan.</p>
-                    <h5 class="card-title"><?= $kategoriCount ?></h5>
-                    <p class="card-text">Total kategori kegiatan.</p>
+                    <p class="card-text">Jumlah sertifikat Anda yang telah divalidasi.</p>
+                    <p class="card-text"><?= $validSertifikat ?? 0 ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card text-white bg-danger mb-3">
-                <div class="card-header">Sertifikat Menunggu Validasi</div>
+                <div class="card-header">Sertifikat Tidak Valid</div>
                 <div class="card-body">
-                    <h5 class="card-title"><?= $sertifikatCount ?></h5>
-                    <p class="card-text">Total sertifikat yang menunggu validasi.</p>
+                    <p class="card-text">Jumlah sertifikat Anda yang tidak valid.</p>
+                    <p class="card-text"><?= $tidakValidSertifikat ?? 0 ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Menunggu Validasi</div>
+                <div class="card-body">
+                    <p class="card-text">Jumlah sertifikat Anda yang sedang menunggu validasi.</p>
+                    <p class="card-text"><?= $menungguValidasiSertifikat ?? 0 ?></p>
                 </div>
             </div>
         </div>

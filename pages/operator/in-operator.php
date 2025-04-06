@@ -14,9 +14,9 @@ if (isset($_POST['submit'])){
     $resulto = mysqli_query($koneksi, "INSERT INTO tb_operator VALUES ('$kode','$nama','$user')");
     $resultp = mysqli_query($koneksi, "INSERT INTO tb_pengguna VALUES (null,'$user',null,'$hashedpass')");
     if ($resulto * $resultp){
-        echo "<script>alert('data berhasil masuk');window.location.href = 'dashboard.php?page=re-operator'; </script>";
+        echo "<script>alert('data berhasil masuk');window.location.href = 'dashboard.php?page=home'; </script>";
     }else{
-        echo "<script>alert('data gagal masuk');window.location.href = 'dashboard.php?page=re-operator'; </script>";
+        echo "<script>alert('data gagal masuk');window.location.href = 'dashboard.php?page=home'; </script>";
     }
 }
 ?>

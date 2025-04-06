@@ -1,4 +1,13 @@
 <?php
+// Ensure no output is sent before this point
+if (isset($_POST['tombol_cetak_laporan'])) {
+    setcookie('angkatan', $_POST['angkatanc'], time() + (60 * 60 * 24 * 7), '/');
+    setcookie('status', $_POST['statusc'], time() + (60 * 60 * 24 * 7), '/');
+    echo "<script>window.location.href='../../cetak/laporan/laporan.php';</script>";
+    exit; // Ensure no further code is executed after redirect
+}
+
+mysqli_query($koneksi, "UPDATE tb_notifikasi set status = 'read' WHERE 1");
 if(isset($_GET['act'])){
     @$idsert=$_GET['id'];
     @$namasert=$_GET['sert'];
@@ -19,17 +28,16 @@ if(isset($_GET['act'])){
             echo"<script>alert('berhasil'); window.location.href='dashboard.php?page=re-sertifikat';</script>";
         }
     }else if ($_GET['act']=="del"){
+        // Check if the file exists and delete it
+        $filePath = "/opt/lampp/htdocs/uk_skkpd/uploads/" . $namasert;
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
         $result = mysqli_query($koneksi,"DELETE FROM tb_sertifikat WHERE id_sertifikat = '$idsert'");
         if($result){
             echo"<script>alert('berhasil dihapus'); window.location.href='dashboard.php?page=re-sertifikat';</script>";
         }
     }
-}
-
-if(@$_POST['tombol_cetak_laporan']){
-    setcookie('angkatan', $_POST['angkatan'], time() + (60 * 60 * 24 * 7), '/');
-    setcookie('status', $_POST['status'], time() + (60 * 60 * 24 * 7), '/');
-    echo "<script>window.location.href='cetak/laporan/laporan.php';</script>";
 }
 
 $angkatan = isset($_COOKIE['angkatan']) ? $_COOKIE['angkatan'] : '';
@@ -101,11 +109,11 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '', $angkatan = '') {
                     </div>
 
                     <dialog id="exampleModal" class="modal-dialog">
-                        <form method="post" class="modal-content p-4">
+                        <form method="post" action="pages/sertifikat/re-sertifikat.php" class="modal-content p-4">
                             <h2 class="modal-title">Saring/Filter</h2>
                             <div class="mb-3">
                                 <label for="angkatan" class="form-label">Pilih Angkatan:</label>
-                                <select name="angkatan" id="angkatan" class="form-select">
+                                <select name="angkatanc" id="angkatan" class="form-select">
                                     <option hidden value="">Pilih Angkatan</option>
                                     <option value="semua">Semua</option>
                                     <?php
@@ -120,7 +128,7 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '', $angkatan = '') {
                             </div>
                             <div class="mb-3">
                                 <label for="status" class="form-label">Pilih Status:</label>
-                                <select name="status" id="status" class="form-select">
+                                <select name="statusc" id="status" class="form-select">
                                     <option hidden value="">Pilih Status</option>
                                     <option value="semua">Semua</option>
                                     <?php
@@ -173,13 +181,9 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '', $angkatan = '') {
                             if (mysqli_num_rows($result) > 0) {
                                 while ($data = mysqli_fetch_assoc($result)) {
                                     echo "<div class='card mb-3'>
-                                            <div class='card-header'>{$data['sertifikat']}</div>
+                                            <div class='card-header'>{$data['nama_siswa']}</div>
                                             <div class='card-body'>
-                                                <p class='card-text'>{$data['nama_siswa']}</p>
-                                                <p class='card-text'>{$data['kategori']}</p>
-                                                <p class='card-text'>{$data['sub_kategori']}</p>
-                                                <p class='card-text'>{$data['jenis_kegiatan']}</p>
-                                                <p class='card-text'>{$data['angkatan']}</p>
+                                                <p class='card-text'><strong>Kategori:</strong> {$data['kategori']}<br/><strong>Sub Kategori:</strong> {$data['sub_kategori']}<br/><strong>Jenis Kegiatan:</strong> {$data['jenis_kegiatan']}<br/><strong>Angkatan:</strong> {$data['angkatan']}</p>
                                                 <a href='dashboard.php?page=see-sertifikat&id={$data['id_sertifikat']}&file={$data['sertifikat']}' target='_blank' class='btn btn-primary'>Lihat Sertifikat</a>
                                                 <a href='dashboard.php?page=re-sertifikat&act=del&id={$data['id_sertifikat']}' class='btn btn-danger'>Delete Sertifikat</a>
                                                 <a href='dashboard.php?page=re-sertifikat&act=verif&id={$data['id_sertifikat']}' class='btn btn-success'>Valid</a>
@@ -199,13 +203,9 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '', $angkatan = '') {
                             if (mysqli_num_rows($result) > 0) {
                                 while ($data = mysqli_fetch_assoc($result)) {
                                     echo "<div class='card mb-3'>
-                                            <div class='card-header'>{$data['sertifikat']}</div>
+                                            <div class='card-header'>{$data['nama_siswa']}</div>
                                             <div class='card-body'>
-                                                <p class='card-text'>{$data['nama_siswa']}</p>
-                                                <p class='card-text'>{$data['kategori']}</p>
-                                                <p class='card-text'>{$data['sub_kategori']}</p>
-                                                <p class='card-text'>{$data['jenis_kegiatan']}</p>
-                                                <p class='card-text'>{$data['angkatan']}</p>
+                                                <p class='card-text'><strong>Kategori:</strong> {$data['kategori']}<br/><strong>Sub Kategori:</strong> {$data['sub_kategori']}<br/><strong>Jenis Kegiatan:</strong> {$data['jenis_kegiatan']}<br/><strong>Angkatan:</strong> {$data['angkatan']}</p>
                                                 <a href='dashboard.php?page=see-sertifikat&id={$data['id_sertifikat']}&file={$data['sertifikat']}' target='_blank' class='btn btn-primary'>Lihat Sertifikat</a>
                                                 <a href='dashboard.php?page=re-sertifikat&act=del&id={$data['id_sertifikat']}' class='btn btn-danger'>Delete Sertifikat</a>
                                                 <a href='dashboard.php?page=re-sertifikat&act=verif&id={$data['id_sertifikat']}' class='btn btn-success'>Valid</a>
@@ -225,13 +225,9 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '', $angkatan = '') {
                             if (mysqli_num_rows($result) > 0) {
                                 while ($data = mysqli_fetch_assoc($result)) {
                                     echo "<div class='card mb-3'>
-                                            <div class='card-header'>{$data['sertifikat']}</div>
+                                            <div class='card-header'>{$data['nama_siswa']}</div>
                                             <div class='card-body'>
-                                                <p class='card-text'>{$data['nama_siswa']}</p>
-                                                <p class='card-text'>{$data['kategori']}</p>
-                                                <p class='card-text'>{$data['sub_kategori']}</p>
-                                                <p class='card-text'>{$data['jenis_kegiatan']}</p>
-                                                <p class='card-text'>{$data['angkatan']}</p>
+                                                <p class='card-text'><strong>Kategori:</strong> {$data['kategori']}<br/><strong>Sub Kategori:</strong> {$data['sub_kategori']}<br/><strong>Jenis Kegiatan:</strong> {$data['jenis_kegiatan']}<br/><strong>Angkatan:</strong> {$data['angkatan']}</p>
                                                 <a href='dashboard.php?page=see-sertifikat&id={$data['id_sertifikat']}&file={$data['sertifikat']}' target='_blank' class='btn btn-primary'>Lihat Sertifikat</a>
                                                 <a href='dashboard.php?page=re-sertifikat&act=del&id={$data['id_sertifikat']}' class='btn btn-danger'>Delete Sertifikat</a>
                                                 <a href='dashboard.php?page=re-sertifikat&act=verif&id={$data['id_sertifikat']}' class='btn btn-success'>Valid</a>

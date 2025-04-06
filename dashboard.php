@@ -68,9 +68,9 @@ if($level == 'operator'){
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php?page=re-siswa">Siswa</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="dashboard.php?page=re-operator">Operator</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php?page=re-jurusan">Jurusan</a>
                     </li>
@@ -112,7 +112,7 @@ if($level == 'operator'){
                                     $username = $_COOKIE['username'];
                                     $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT kode_operator FROM tb_operator WHERE username = '$username'"));
                                     echo $data['kode_operator'];
-                                    ?>">Data Diri</a>
+                                    ?>">Data Operator</a>
                             </li>
                             <li><a class="dropdown-item" href="stl-page/login.php">Login</a></li>
                             <li><a class="dropdown-item" href="stl-page/logout.php">Logout</a></li>
@@ -151,9 +151,9 @@ if($level == 'operator'){
         case "in-operator":
             include "pages/operator/in-operator.php";
         break;
-        case "re-operator":
-            include "pages/operator/re-operator.php";
-        break;
+        // case "re-operator":
+        //     include "pages/operator/re-operator.php";
+        // break;
         case "up-operator":
             include "pages/operator/up-operator.php";
         break;
@@ -249,7 +249,7 @@ if($level == 'operator'){
     <?php
     switch(@$_GET['page']){
         case "home":
-            include "pages/home.php";
+            include "pages/for-siswa/home.php";
         break;
         default:
             include "pages/notfound.php";
@@ -276,7 +276,7 @@ if($level == 'operator'){
     <!-- Custom Footer -->
     <footer class="bg-dark text-white text-center py-3">
         <div class="container">
-            <p>&copy; 2025 Qwentifer. All rights reserved.</p>
+            <p>Created by Abdi Kesawa. 2025</p>
             <p>Follow me on:
                 <a href="https://www.facebook.com/profile.php?id=100086204222090" class="text-white me-2"><i
                         class="bi bi-facebook"></i></a>

@@ -2,7 +2,7 @@
 if(!@$_COOKIE['level_user']) {
     echo "<script>alert('belum login');window.location.href='../login.php'</script>";
 }elseif($_COOKIE['level_user']=='operator') {
-    echo "<script>alert('anda operator, silahkan kembali');window.location.href='halaman_utama.php?page=sertifikat'</script>";
+    echo "<script>alert('anda operator, silahkan kembali');window.location.href='dashboard.php?page=sertifikat'</script>";
 }
 
 // Mengambil parameter dari URL
@@ -30,7 +30,7 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
     $tgl            = date("Y-m-d");
     $sertifikat     = $_FILES["sertifikat"]['name'];
     $file           = $_FILES["sertifikat"];
-    $folder         = "../sertifikat/";
+    $folder         = "sertifikat/";
     $ekstensi       = strtolower(pathinfo($_FILES["sertifikat"]['name'], PATHINFO_EXTENSION));
     $ukuran         = $file["size"];
     $nis            = $_COOKIE['nis'];
@@ -49,7 +49,7 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
         } while (file_exists($targetFile)); // Cek apakah file sudah ada, jika ada buat ulang
 
         // Hapus file lama jika ada
-        $file_path = "../sertifikat/" . $data['sertifikat'];
+        $file_path = "sertifikat/" . $data['sertifikat'];
         if (!empty($data['sertifikat']) && file_exists($file_path)) {
             unlink($file_path);
         }
@@ -62,7 +62,7 @@ if(isset($_POST['tombol_upload']) && isset($_FILES["sertifikat"])){
                       WHERE id_sertifikat='$id'");
 
             if ($update) {
-                echo "<script>alert('Berhasil Mengunggah Ulang Sertifikat');window.location.href='halaman_utama.php?page=cek_sertifikat_siswa&id=".$id."&file=".$newFileName."'</script>";
+                echo "<script>alert('Berhasil Mengunggah Ulang Sertifikat');window.location.href='dashboard.php?page=cek_sertifikat_siswa&id=".$id."&file=".$newFileName."'</script>";
             } else {
                 echo "Gagal mengupdate database: " . mysqli_error($koneksi);
             }

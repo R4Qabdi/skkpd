@@ -2,7 +2,7 @@
 if(isset($_POST['tombol_tambah'])){
     $kategori       = htmlspecialchars($_GET['kategori']);
     $sub_kategori   = htmlspecialchars($_GET['sub_kategori']);
-    $kegiatan       = substr(htmlspecialchars($_POST['kegiatan']), 0, 32);
+    $kegiatan       = substr(htmlspecialchars($_POST['kegiatan']), 0, 64);
     $cek_kegiatan   = mysqli_query($koneksi, "SELECT jenis_kegiatan FROM tb_kegiatan WHERE jenis_kegiatan = '$kegiatan'");
     if(mysqli_num_rows($cek_kegiatan) > 0){
         echo "<script>alert('Data Sudah ada di database, silahkan masukkan jenis kegiatan baru');window.location.href='dashboard.php?page=in-kategori-kegiatan&kategori=".$kategori."&sub_kategori=".$sub_kategori."'</script>";
@@ -119,7 +119,7 @@ if(isset($_POST['tombol_tambah'])){
                         <div class="mb-3">
                             <label for="kegiatan" class="form-label">Nama Kegiatan</label>
                             <input type="text" class="form-control" name="kegiatan" list="kegiatan" id="kegiatan"
-                                maxlength="32" placeholder="Masukkan Nama Kegiatan" required />
+                                maxlength="64" placeholder="Masukkan Nama Kegiatan" required />
                         </div>
                         <div class="mb-3">
                             <label for="point" class="form-label">Angka Kredit / Point</label>

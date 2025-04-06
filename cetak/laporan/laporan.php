@@ -28,8 +28,8 @@ function tampilSertifikat($pdf, $koneksi, $angkatan, $status = NULL) {
     $pdf->Cell(20, 7, 'NIS', 1);
     $pdf->Cell(55, 7, 'Nama Siswa', 1);
     $pdf->Cell(60, 7, 'Jenis Kegiatan', 1);
-    $pdf->Cell(33, 7, 'Status', 1);
-    $pdf->Cell(12, 7, 'Kelas', 1, 1);
+    $pdf->Cell(30, 7, 'Status', 1);
+    $pdf->Cell(15, 7, 'Kelas', 1, 1);
 
     $query = "SELECT nis, nama_siswa, jenis_kegiatan, kelas, angkatan, jurusan, status
     FROM tb_sertifikat 
@@ -47,8 +47,8 @@ function tampilSertifikat($pdf, $koneksi, $angkatan, $status = NULL) {
         $pdf->Cell(20, 7, $row['nis'], 1);
         $pdf->Cell(55, 7, $row['nama_siswa'], 1);
         $pdf->Cell(60, 7, $row['jenis_kegiatan'], 1);
-        $pdf->Cell(33, 7, $row['status'], 1);
-        $pdf->Cell(12, 7, $row['jurusan']." ".$row['kelas'], 1, 1);
+        $pdf->Cell(30, 7, $row['status'], 1);
+        $pdf->Cell(15, 7, $row['jurusan']." ".$row['kelas'], 1, 1);
     }
     $pdf->Ln(5);
 }

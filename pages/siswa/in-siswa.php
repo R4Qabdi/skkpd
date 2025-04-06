@@ -9,6 +9,13 @@ if(isset($_POST['submit'])){
     $angkatan = $_POST['angkatan'];
     $jurusan = $_POST['jurusan'];
 
+    // Check for duplicate NIS
+    $check_nis = mysqli_query($koneksi, "SELECT * FROM tb_siswa WHERE nis = '$nis'");
+    if (mysqli_num_rows($check_nis) > 0) {
+        echo "<script>alert('NIS sudah terdaftar'); window.location.href = 'dashboard.php?page=in-siswa'</script>";
+        exit;
+    }
+
     if ($lancar = true){
         $resultsiswa = mysqli_query($koneksi, "INSERT INTO tb_siswa VALUES('$nis','$absen','$nama','$telp','$email','$kelas','$angkatan','$jurusan');");
         $pass_siswa = "siswa".$nis;

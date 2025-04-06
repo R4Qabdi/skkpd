@@ -66,7 +66,3 @@ if (isset($_GET['kode'])){
     </div>
 </div>
 <div class="mb-5"></div>
-<div class="mb-5"></div>
-<div class="mb-5"></div>
-<div class="mb-5"></div>
-<div class="mb-3"></div>

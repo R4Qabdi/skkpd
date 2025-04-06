@@ -14,7 +14,7 @@ if (isset($_GET['kode'])){
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 text-center mb-4">
-            <a name="" id="" class="btn btn-success" href="dashboard.php?page=in-jurusan" role="button">Tambah Data</a>
+            <a name="" id="" class="btn btn-success" href="dashboard.php?page=in-jurusan" role="button">Tambah data</a>
         </div>
         <div class="col-12">
             <div class="table-responsive">

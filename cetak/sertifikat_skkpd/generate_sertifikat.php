@@ -4,16 +4,16 @@ include "../../koneksi.php";
 if (!@$_COOKIE['level_user']) {
     echo "<script>alert('belum login');window.location.href='../../login.php'</script>";
 } elseif ($_COOKIE['level_user'] == 'operator') {
-    echo "<script>alert('anda operator, silahkan kembali');window.location.href='../../tampilan/halaman_utama.php?page=sertifikat'</script>";
+    echo "<script>alert('anda operator, silahkan kembali');window.location.href='../../tampilan/dashboard.php?page=sertifikat'</script>";
 }
 
 $nis = $_COOKIE['nis'];
 $nama = $_COOKIE['nama_lengkap'];
 
-$total_point = mysqli_fetch_row(mysqli_query($koneksi, "SELECT SUM(Angka_Kredit) FROM sertifikat INNER JOIN kegiatan USING(Id_Kegiatan) WHERE Status='Valid' AND NIS='$nis'"))[0];
+$total_point = mysqli_fetch_row(mysqli_query($koneksi, "SELECT SUM(Angka_Kredit) FROM tb_sertifikat INNER JOIN tb_kegiatan USING(id_kegiatan) WHERE Status='valid' AND nis='$nis'"))[0];
 
 if ($total_point < 30) {
-    echo "<script>alert('Poin belum cukup untuk mencetak sertifikat!!!');window.location.href='../../tampilan/halaman_utama.php?page=sertifikat_siswa'</script>";
+    echo "<script>alert('Poin belum cukup untuk mencetak sertifikat!!!');window.location.href='../../tampilan/dashboard.php?page=sertifikat_siswa'</script>";
 }
 
 

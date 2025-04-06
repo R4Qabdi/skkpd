@@ -41,7 +41,7 @@ function getSertifikat($koneksi, $status = '', $kegiatan = '') {
                     <td>{$data['nama_siswa']}</td>
                     <td>{$data['angkatan']}</td>
                     <td>{$data['status']}</td>
-                    <td><a href='halaman_utama.php?page=cek_sertifikat&id={$data['id_sertifikat']}&file={$data['sertifikat']}' target='_blank'>Lihat File</a></td>
+                    <td><a href='dashboard.php?page=cek_sertifikat&id={$data['id_sertifikat']}&file={$data['sertifikat']}' target='_blank'>Lihat File</a></td>
                   </tr>";
         }
         echo "</tbody></table></div>";
