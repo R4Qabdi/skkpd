@@ -42,7 +42,7 @@ if (isset($_GET['nis'])){
                     if(mysqli_num_rows($resultuser)>0 && mysqli_num_rows($resultsertif)>0){
                     ?>
                     <a name="" id="" class="btn btn-danger" href="" role="button"
-                        onclick="return alert('hapus data sertifikat dan data pengguna terlebih dahulu')">Delete</a>
+                        onclick="return alert('hapus data sertifikat terlebih dahulu')">Delete</a>
                     <?php
                     }else if(mysqli_num_rows($resultsertif)>0){
                     ?>
