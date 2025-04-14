@@ -2,9 +2,11 @@
 if (isset($_GET['nis'])){
     
     $ceknis = $_GET['nis'];
+    @$idp = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT id_pengguna FROM tb_pengguna INNER JOIN tb_siswa USING(nis) where nis = '$ceknis'"));
+    @$resultn = mysqli_query($koneksi, "DELETE FROM tb_notifikasi where id_pengguna='$idp'");
     $resultp = mysqli_query($koneksi, "DELETE FROM tb_pengguna where nis='$ceknis'");
     $result = mysqli_query($koneksi, "DELETE FROM tb_siswa WHERE nis='$ceknis'");
-    if($result * $resultp){
+    if($result * $resultp * $resultn){
         echo "<script>alert('data berhasil dihapus!'); window.location.href = 'dashboard.php?page=re-siswa';</script>";
     }else{
         echo "<script>alert('data gagal dihapus!'); window.location.href = 'dashboard.php?page=re-siswa';</script>";
