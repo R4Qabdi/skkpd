@@ -93,7 +93,7 @@ if($level == 'operator'){
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
                             <?php
-                            $notifications = mysqli_query($koneksi, "SELECT * FROM tb_notifikasi ORDER BY tanggal DESC LIMIT 5");
+                            $notifications = mysqli_query($koneksi, "SELECT * FROM tb_notifikasi WHERE status = 'unread' ORDER BY tanggal DESC LIMIT 5");
                             while ($notif = mysqli_fetch_assoc($notifications)) {
                                 echo "<li><a class='dropdown-item' href='dashboard.php?page=re-sertifikat&notif_id={$notif['id_notifikasi']}'>{$notif['pesan']}</a></li>";
                             }
